@@ -2,26 +2,44 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IRootState } from '@/store';
+import Link from 'next/link';
 
 const CoursesPage = () => {
     const { courses } = useSelector((state: IRootState) => state.courses);
     const [selectedLevel, setSelectedLevel] = useState<string>('all');
+    const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-    const filteredCourses = selectedLevel === 'all' 
-        ? courses 
-        : courses.filter(course => course.level === selectedLevel);
+    const filteredCourses = courses.filter(course => {
+        const levelMatch = selectedLevel === 'all' || course.level === selectedLevel;
+        const categoryMatch = selectedCategory === 'all' || course.category === selectedCategory;
+        return levelMatch && categoryMatch;
+    });
 
     const levels = [
-        { value: 'all', label: 'সকল কোর্স' },
+        { value: 'all', label: 'সকল স্তর' },
         { value: 'beginner', label: 'শুরুর স্তর' },
         { value: 'intermediate', label: 'মধ্যম স্তর' },
         { value: 'advanced', label: 'উন্নত স্তর' }
+    ];
+
+    const categories = [
+        { value: 'all', label: 'সকল ক্যাটেগরি' },
+        { value: 'HSC', label: 'HSC' },
+        { value: 'SSC', label: 'SSC' },
+        { value: 'Language', label: 'ভাষা' },
+        { value: 'International', label: 'আন্তর্জাতিক' },
+        { value: 'Competition', label: 'প্রতিযোগিতা' },
+        { value: 'Technology', label: 'প্রযুক্তি' }
     ];
 
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section - Dark */}
             <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+                {/* Grid Background */}
+                <div className="absolute inset-0 [background-size:40px_40px] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)]"></div>
+                
+                {/* Soft Green Gradient Overlays */}
                 <div className="absolute inset-0">
                     <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
                     <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
@@ -44,11 +62,11 @@ const CoursesPage = () => {
                         </p>
                         <div className="flex justify-center space-x-8 text-sm">
                             <div className="text-center">
-                                <div className="text-3xl font-bold text-emerald-400">৫০+</div>
+                                <div className="text-3xl font-bold text-emerald-400">{courses.length}+</div>
                                 <div className="text-gray-300">কোর্স</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-3xl font-bold text-emerald-400">১০০০+</div>
+                                <div className="text-3xl font-bold text-emerald-400">{courses.reduce((sum, course) => sum + course.totalStudents, 0)}+</div>
                                 <div className="text-gray-300">শিক্ষার্থী</div>
                             </div>
                             <div className="text-center">
@@ -70,27 +88,53 @@ const CoursesPage = () => {
                     }}></div>
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-b border-gray-100">
-                    <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-b border-gray-100">
+                    <div className="flex flex-wrap items-center justify-between gap-6">
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-900">কোর্স ফিল্টার</h2>
-                            <p className="text-sm text-gray-600">আপনার পছন্দের কোর্স খুঁজে নিন</p>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-2">কোর্স ফিল্টার</h2>
+                            <p className="text-gray-600">আপনার পছন্দের কোর্স খুঁজে নিন</p>
                         </div>
                         
-                        <div className="flex flex-wrap gap-2">
-                            {levels.map((level) => (
-                                <button
-                                    key={level.value}
-                                    onClick={() => setSelectedLevel(level.value)}
-                                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                                        selectedLevel === level.value
-                                            ? 'bg-emerald-500 text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
-                                    }`}
-                                >
-                                    {level.label}
-                                </button>
-                            ))}
+                        <div className="flex flex-wrap gap-4">
+                            {/* Level Filter */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700">স্তর অনুযায়ী</label>
+                                <div className="flex flex-wrap gap-2">
+                                    {levels.map((level) => (
+                                        <button
+                                            key={level.value}
+                                            onClick={() => setSelectedLevel(level.value)}
+                                            className={`px-4 py-2 text-sm font-medium transition-colors ${
+                                                selectedLevel === level.value
+                                                    ? 'bg-emerald-500 text-white'
+                                                    : 'bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
+                                            }`}
+                                        >
+                                            {level.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Category Filter */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700">ক্যাটেগরি অনুযায়ী</label>
+                                <div className="flex flex-wrap gap-2">
+                                    {categories.map((category) => (
+                                        <button
+                                            key={category.value}
+                                            onClick={() => setSelectedCategory(category.value)}
+                                            className={`px-4 py-2 text-sm font-medium transition-colors ${
+                                                selectedCategory === category.value
+                                                    ? 'bg-green-500 text-white'
+                                                    : 'bg-gray-100 text-gray-700 hover:bg-green-50 hover:text-green-700'
+                                            }`}
+                                        >
+                                            {category.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,11 +162,13 @@ const CoursesPage = () => {
                                                 জনপ্রিয়
                                             </div>
                                         )}
-                                        <div className="text-6xl opacity-20">
-                                            {course.id === '1' && '🎓'}
-                                            {course.id === '2' && '🌍'}
-                                            {course.id === '3' && '📊'}
-                                            {course.id === '4' && '🏆'}
+                                        <div className="text-center">
+                                            <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mb-3 mx-auto">
+                                                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                </svg>
+                                            </div>
+                                            <div className="text-sm font-medium text-emerald-600">{course.category}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -151,16 +197,33 @@ const CoursesPage = () => {
                                         </p>
                                     </div>
 
+                                    {/* Course Stats */}
+                                    <div className="grid grid-cols-2 gap-4 py-3 border-t border-gray-100">
+                                        <div className="text-center">
+                                            <div className="text-lg font-bold text-emerald-600">{course.totalStudents}</div>
+                                            <div className="text-xs text-gray-500">শিক্ষার্থী</div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="text-lg font-bold text-green-600">{course.rating}</div>
+                                            <div className="text-xs text-gray-500">রেটিং</div>
+                                        </div>
+                                    </div>
+
                                     {/* Course Info */}
-                                    <div className="flex items-center justify-between text-sm text-gray-500">
+                                    <div className="flex items-center justify-between text-sm text-gray-500 border-t border-gray-100 pt-3">
                                         <div className="flex items-center">
                                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             {course.duration}
                                         </div>
-                                        <div className="text-2xl font-bold text-emerald-600">
-                                            ৳{course.price.toLocaleString()}
+                                        <div className="text-right">
+                                            {course.originalPrice && (
+                                                <div className="text-xs text-gray-400 line-through">৳{course.originalPrice.toLocaleString()}</div>
+                                            )}
+                                            <div className="text-lg font-bold text-emerald-600">
+                                                ৳{course.price.toLocaleString()}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -184,9 +247,14 @@ const CoursesPage = () => {
                                         </ul>
                                     </div>
 
-                                    {/* CTA Button */}
-                                    <div className="pt-4">
-                                        <button className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-3 px-6 font-semibold transition-all duration-300">
+                                    {/* CTA Buttons */}
+                                    <div className="pt-4 space-y-2">
+                                        <Link href={`/courses/${course.id}`}>
+                                            <button className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-3 px-6 font-semibold transition-all duration-300">
+                                                বিস্তারিত দেখুন
+                                            </button>
+                                        </Link>
+                                        <button className="w-full border-2 border-emerald-500 text-emerald-600 hover:bg-emerald-50 py-2 px-6 font-medium transition-all duration-300">
                                             ভর্তি হন
                                         </button>
                                     </div>
@@ -204,7 +272,7 @@ const CoursesPage = () => {
                                 </svg>
                             </div>
                             <h3 className="text-lg font-medium text-gray-900 mb-2">কোন কোর্স পাওয়া যায়নি</h3>
-                            <p className="text-gray-500">এই ক্যাটেগরিতে কোন কোর্স নেই।</p>
+                            <p className="text-gray-500">এই ফিল্টারে কোন কোর্স নেই। অন্য ফিল্টার ব্যবহার করে দেখুন।</p>
                         </div>
                     )}
                 </div>

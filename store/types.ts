@@ -73,12 +73,26 @@ export interface Course {
     title: string;
     titleEn: string;
     description: string;
+    fullDescription: string;
     image: string;
     price: number;
+    originalPrice?: number;
     duration: string;
     level: 'beginner' | 'intermediate' | 'advanced';
     features: string[];
+    curriculum: string[];
+    instructor: string;
+    instructorImage: string;
+    instructorBio: string;
+    totalStudents: number;
+    rating: number;
+    totalLessons: number;
+    totalHours: number;
+    certificate: boolean;
     isPopular: boolean;
+    category: string;
+    prerequisites: string[];
+    whatYouWillLearn: string[];
     createdAt: string;
 }
 
