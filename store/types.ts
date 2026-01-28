@@ -43,6 +43,31 @@ export interface MCQ {
     createdAt: string;
 }
 
+export interface VideoClass {
+    id: string;
+    chapterId: string;
+    title: string;
+    titleEn: string;
+    description: string;
+    videoUrl: string;
+    duration: string; // in minutes
+    thumbnail: string;
+    instructor: string;
+    createdAt: string;
+}
+
+export interface PDFNote {
+    id: string;
+    chapterId: string;
+    title: string;
+    titleEn: string;
+    description: string;
+    fileUrl: string;
+    fileSize: string; // in MB
+    pages: number;
+    createdAt: string;
+}
+
 export interface Course {
     id: string;
     title: string;

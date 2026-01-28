@@ -1,6 +1,4 @@
 import React from 'react';
-import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
 
 const AboutPage = () => {
     const teamMembers = [
@@ -103,38 +101,63 @@ const AboutPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
-            <div className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="min-h-screen bg-white">
+            {/* Hero Section - Dark */}
+            <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+                {/* Background Effects */}
+                <div className="absolute inset-0">
+                    <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
+                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                     <div className="text-center">
-                        <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                            আমাদের সম্পর্কে
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 mb-6">
+                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+                                আমাদের সম্পর্কে
+                            </span>
                         </h1>
-                        <p className="text-xl text-primary-100 max-w-3xl mx-auto">
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                             শিক্ষার মাধ্যমে জীবন পরিবর্তনের স্বপ্ন নিয়ে আমাদের যাত্রা
                         </p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Mission & Vision */}
-            <div className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Mission & Vision - White */}
+            <section className="relative py-20 bg-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
+                    <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: `radial-gradient(circle at 25px 25px, rgba(16, 185, 129, 0.1) 2px, transparent 0), 
+                                         radial-gradient(circle at 75px 75px, rgba(5, 150, 105, 0.1) 2px, transparent 0)`,
+                        backgroundSize: '100px 100px'
+                    }}></div>
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">আমাদের লক্ষ্য ও উদ্দেশ্য</h2>
+                            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                                <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                                    আমাদের লক্ষ্য ও উদ্দেশ্য
+                                </span>
+                            </h2>
                             <div className="space-y-8">
-                                <div>
-                                    <h3 className="text-xl font-semibold text-primary-600 mb-3">আমাদের মিশন</h3>
+                                <div className="bg-white p-6 border border-gray-100">
+                                    <h3 className="text-xl font-semibold text-emerald-600 mb-3">আমাদের মিশন</h3>
                                     <p className="text-gray-600 leading-relaxed">
                                         প্রতিটি শিক্ষার্থীকে সর্বোচ্চ মানের শিক্ষা প্রদান করে তাদের একাডেমিক উৎকর্ষতা 
                                         এবং ব্যক্তিত্ব বিকাশে সহায়তা করা। আমরা চাই প্রতিটি শিক্ষার্থী তাদের স্বপ্ন 
                                         পূরণের জন্য প্রয়োজনীয় জ্ঞান ও দক্ষতা অর্জন করুক।
                                     </p>
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold text-primary-600 mb-3">আমাদের ভিশন</h3>
+                                <div className="bg-white p-6 border border-gray-100">
+                                    <h3 className="text-xl font-semibold text-emerald-600 mb-3">আমাদের ভিশন</h3>
                                     <p className="text-gray-600 leading-relaxed">
                                         বাংলাদেশের শিক্ষা ক্ষেত্রে একটি অগ্রণী প্রতিষ্ঠান হিসেবে প্রতিষ্ঠিত হওয়া 
                                         এবং আন্তর্জাতিক মানের শিক্ষা প্রদানের মাধ্যমে দেশের শিক্ষার্থীদের বিশ্বব্যাপী 
@@ -143,78 +166,101 @@ const AboutPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8 text-center">
-                            <div className="space-y-6">
+                        <div className="bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100 p-8 text-center">
+                            <div className="grid grid-cols-2 gap-6">
                                 <div>
-                                    <div className="text-4xl font-bold text-primary-600">৫+</div>
+                                    <div className="text-4xl font-bold text-emerald-600">৫+</div>
                                     <div className="text-gray-600">বছরের অভিজ্ঞতা</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl font-bold text-primary-600">১০০০+</div>
+                                    <div className="text-4xl font-bold text-emerald-600">১০০০+</div>
                                     <div className="text-gray-600">সফল শিক্ষার্থী</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl font-bold text-primary-600">৫০+</div>
+                                    <div className="text-4xl font-bold text-emerald-600">৫০+</div>
                                     <div className="text-gray-600">কোর্স ও প্রোগ্রাম</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl font-bold text-primary-600">৯৮%</div>
+                                    <div className="text-4xl font-bold text-emerald-600">৯৮%</div>
                                     <div className="text-gray-600">সফলতার হার</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Our Values */}
-            <div className="py-20 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Our Values - Dark */}
+            <section className="relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+                <div className="absolute inset-0">
+                    <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
+                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">আমাদের মূল্যবোধ</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+                                আমাদের মূল্যবোধ
+                            </span>
+                        </h2>
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                             যে মূল্যবোধগুলো আমাদের প্রতিটি কাজে প্রতিফলিত হয়
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, index) => (
-                            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
-                                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
-                                    {value.icon}
+                            <div key={index} className="group relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                                <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 p-8 hover:bg-white/15 transition-all duration-300 text-center">
+                                    <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-500 flex items-center justify-center mx-auto mb-4 text-white">
+                                        {value.icon}
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-white mb-3">
+                                        {value.title}
+                                    </h3>
+                                    <p className="text-gray-300 text-sm leading-relaxed">
+                                        {value.description}
+                                    </p>
                                 </div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                                    {value.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {value.description}
-                                </p>
-                            </Card>
+                            </div>
                         ))}
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Timeline */}
-            <div className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Timeline - White */}
+            <section className="relative py-20 bg-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
+                    <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: `radial-gradient(circle at 25px 25px, rgba(16, 185, 129, 0.1) 2px, transparent 0), 
+                                         radial-gradient(circle at 75px 75px, rgba(5, 150, 105, 0.1) 2px, transparent 0)`,
+                        backgroundSize: '100px 100px'
+                    }}></div>
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">আমাদের যাত্রাপথ</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                            <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                                আমাদের যাত্রাপথ
+                            </span>
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                             প্রতিষ্ঠার পর থেকে আজ পর্যন্ত আমাদের অর্জনসমূহ
                         </p>
                     </div>
 
                     <div className="relative">
-                        {/* Timeline Line */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary-200"></div>
+                        <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-emerald-200"></div>
 
                         <div className="space-y-12">
                             {milestones.map((milestone, index) => (
                                 <div key={index} className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                                     <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                                        <Card className="inline-block">
-                                            <div className="text-2xl font-bold text-primary-600 mb-2">
+                                        <div className="inline-block bg-white border border-gray-100 p-6">
+                                            <div className="text-2xl font-bold text-emerald-600 mb-2">
                                                 {milestone.year}
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -223,11 +269,10 @@ const AboutPage = () => {
                                             <p className="text-gray-600 text-sm">
                                                 {milestone.description}
                                             </p>
-                                        </Card>
+                                        </div>
                                     </div>
                                     
-                                    {/* Timeline Dot */}
-                                    <div className="relative z-10 w-4 h-4 bg-primary-600 rounded-full border-4 border-white shadow-lg"></div>
+                                    <div className="relative z-10 w-4 h-4 bg-emerald-600 border-4 border-white"></div>
                                     
                                     <div className="w-1/2"></div>
                                 </div>
@@ -235,59 +280,81 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Team Section */}
-            <div className="py-20 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Team Section - Dark */}
+            <section className="relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+                <div className="absolute inset-0">
+                    <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
+                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">আমাদের নেতৃত্ব</h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                            <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+                                আমাদের নেতৃত্ব
+                            </span>
+                        </h2>
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                             অভিজ্ঞ ও দক্ষ নেতৃত্বে পরিচালিত আমাদের প্রতিষ্ঠান
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {teamMembers.map((member) => (
-                            <Card key={member.id} className="text-center hover:shadow-lg transition-shadow duration-300">
-                                <div className="w-24 h-24 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <div className="text-3xl">👨‍🏫</div>
+                            <div key={member.id} className="group relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                                <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 p-8 hover:bg-white/15 transition-all duration-300 text-center">
+                                    <div className="w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-500 mx-auto mb-4 flex items-center justify-center">
+                                        <div className="text-3xl">👨‍🏫</div>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-1">
+                                        {member.name}
+                                    </h3>
+                                    <p className="text-sm text-gray-400 mb-2">{member.nameEn}</p>
+                                    <p className="text-emerald-300 font-medium mb-3">
+                                        {member.position}
+                                    </p>
+                                    <p className="text-gray-300 text-sm leading-relaxed">
+                                        {member.bio}
+                                    </p>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-1">
-                                    {member.name}
-                                </h3>
-                                <p className="text-sm text-gray-500 mb-2">{member.nameEn}</p>
-                                <p className="text-primary-600 font-medium mb-3">
-                                    {member.position}
-                                </p>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {member.bio}
-                                </p>
-                            </Card>
+                            </div>
                         ))}
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* CTA Section */}
-            <div className="py-20 bg-primary-600 text-white">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl font-bold mb-4">
-                        আমাদের সাথে যুক্ত হন
+            {/* CTA Section - White */}
+            <section className="relative py-20 bg-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
+                    <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: `radial-gradient(circle at 25px 25px, rgba(16, 185, 129, 0.1) 2px, transparent 0), 
+                                         radial-gradient(circle at 75px 75px, rgba(5, 150, 105, 0.1) 2px, transparent 0)`,
+                        backgroundSize: '100px 100px'
+                    }}></div>
+                </div>
+
+                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                        <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                            আমাদের সাথে যুক্ত হন
+                        </span>
                     </h2>
-                    <p className="text-xl text-primary-100 mb-8">
+                    <p className="text-xl text-gray-600 mb-8">
                         আপনার শিক্ষার যাত্রায় আমরা আপনার সাথী হতে চাই
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button variant="secondary" size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
+                        <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300">
                             কোর্সে ভর্তি হন
-                        </Button>
-                        <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary-600">
+                        </button>
+                        <button className="border-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 px-8 py-4 text-lg font-semibold transition-all duration-300">
                             যোগাযোগ করুন
-                        </Button>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };
