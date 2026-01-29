@@ -29,6 +29,7 @@ const dummyTeachers: Teacher[] = [
       district: 'ঢাকা',
       postalCode: '১২০৫',
       country: 'বাংলাদেশ',
+      division: ''
     },
     qualifications: [
       {
@@ -99,6 +100,7 @@ const dummyTeachers: Teacher[] = [
       district: 'ঢাকা',
       postalCode: '১২১২',
       country: 'বাংলাদেশ',
+      division: ''
     },
     qualifications: [
       {
@@ -160,6 +162,7 @@ const dummyTeachers: Teacher[] = [
       district: 'ঢাকা',
       postalCode: '১২১৩',
       country: 'বাংলাদেশ',
+      division: ''
     },
     qualifications: [
       {
@@ -222,6 +225,7 @@ const dummyTeachers: Teacher[] = [
       district: 'ঢাকা',
       postalCode: '১২৩০',
       country: 'বাংলাদেশ',
+      division: ''
     },
     qualifications: [
       {
@@ -283,6 +287,7 @@ const dummyTeachers: Teacher[] = [
       district: 'ঢাকা',
       postalCode: '১২১৬',
       country: 'বাংলাদেশ',
+      division: ''
     },
     qualifications: [
       {
@@ -543,6 +548,7 @@ export const createTeacher = createAsyncThunk(
       updatedAt: new Date().toISOString(),
       createdBy: 'admin-001',
       updatedBy: 'admin-001',
+      status: 'active'
     };
     
     return newTeacher;
@@ -560,9 +566,22 @@ export const updateTeacher = createAsyncThunk(
       throw new Error('শিক্ষক খুঁজে পাওয়া যায়নি');
     }
     
+    // Ensure qualifications and experience have IDs and are not undefined
+    const processedData = {
+      ...teacherData,
+      qualifications: teacherData.qualifications?.map((qual, index) => ({
+        ...qual,
+        id: (qual as any).id || `qual-${teacherData.id}-${index + 1}`,
+      })) || existingTeacher.qualifications,
+      experience: teacherData.experience?.map((exp, index) => ({
+        ...exp,
+        id: (exp as any).id || `exp-${teacherData.id}-${index + 1}`,
+      })) || existingTeacher.experience,
+    };
+    
     const updatedTeacher: Teacher = {
       ...existingTeacher,
-      ...teacherData,
+      ...processedData,
       updatedAt: new Date().toISOString(),
       updatedBy: 'admin-001',
     };

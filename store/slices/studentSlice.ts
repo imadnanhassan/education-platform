@@ -290,6 +290,7 @@ export const createStudent = createAsyncThunk(
       isPhoneVerified: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      nationality: ''
     };
     
     return newStudent;
@@ -541,11 +542,11 @@ const studentSlice = createSlice({
       .addCase(bulkUpdateStudents.fulfilled, (state, action) => {
         state.loading.update = false;
         // Update students based on operation
-        const { studentIds, operation } = action.payload;
+        const { studentIds } = action.payload;
         
         state.students = state.students.map(student => {
           if (studentIds.includes(student.id)) {
-            switch (operation.operation) {
+            switch (action.payload.operation) {
               case 'activate':
                 return { ...student, status: 'active' as const };
               case 'deactivate':

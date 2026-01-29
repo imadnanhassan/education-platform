@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Course } from '@/store/types/course';
+import { Course, CourseStatusChangeInfo } from '@/store/types/course';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
 import { CourseStatusManager } from './CourseStatusManager';
@@ -71,7 +71,7 @@ interface CourseDetailsProps {
   course: Course;
   onPublish?: () => void;
   onUnpublish?: () => void;
-  onStatusChange?: (courseId: string, newStatus: Course['status'], reason?: string) => void;
+  onStatusChange?: (statusChangeInfo: CourseStatusChangeInfo) => void;
   className?: string;
 }
 

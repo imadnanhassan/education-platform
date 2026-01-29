@@ -116,7 +116,7 @@ export interface Course {
   instructorInfo?: CourseInstructor;
   subjects: Subject[];
   tags: string[];
-  prerequisites?: string;
+  prerequisites: string[];
   learningOutcomes: string[];
   targetAudience?: string[];
   
@@ -132,6 +132,18 @@ export interface Course {
   rating: number;
   totalRatings: number;
   enrollmentInfo?: CourseEnrollmentInfo;
+  
+  // Additional frontend properties
+  isPopular?: boolean;
+  totalLessons?: number;
+  totalHours?: number;
+  certificate?: boolean;
+  features?: string[];
+  curriculum?: string[];
+  instructorImage?: string;
+  instructorBio?: string;
+  fullDescription?: string;
+  whatYouWillLearn?: string[];
   
   // Publishing information
   publishedAt?: string;

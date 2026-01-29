@@ -106,6 +106,10 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.error = null;
+      // Clear saved credentials from localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('rememberedCredentials');
+      }
     },
     clearError: (state) => {
       state.error = null;

@@ -124,7 +124,7 @@ export const teacherSchema = z.object({
         }, 'বয়স ২২ থেকে ৭০ বছরের মধ্যে হতে হবে'),
     gender: z
         .enum(['male', 'female', 'other'], {
-            errorMap: () => ({ message: 'লিঙ্গ নির্বাচন করুন' })
+            message: 'লিঙ্গ নির্বাচন করুন'
         }),
     address: addressSchema,
     qualifications: z
@@ -161,7 +161,7 @@ export const teacherSchema = z.object({
     socialLinks: socialLinksSchema.optional(),
     status: z
         .enum(['active', 'inactive', 'on_leave'], {
-            errorMap: () => ({ message: 'অবস্থা নির্বাচন করুন' })
+            message: 'অবস্থা নির্বাচন করুন'
         })
         .default('active'),
     joinDate: z
@@ -226,7 +226,7 @@ export const teacherFilterSchema = z.object({
         .or(z.literal('')),
     status: z
         .enum(['all', 'active', 'inactive', 'on_leave'], {
-            errorMap: () => ({ message: 'অবস্থা নির্বাচন করুন' })
+            message: 'অবস্থা নির্বাচন করুন'
         })
         .default('all'),
     specialization: z
@@ -235,7 +235,7 @@ export const teacherFilterSchema = z.object({
         .or(z.literal('')),
     gender: z
         .enum(['all', 'male', 'female', 'other'], {
-            errorMap: () => ({ message: 'লিঙ্গ নির্বাচন করুন' })
+            message: 'লিঙ্গ নির্বাচন করুন'
         })
         .default('all'),
     joinDateFrom: z
@@ -248,17 +248,17 @@ export const teacherFilterSchema = z.object({
         .or(z.literal('')),
     hasAssignedCourses: z
         .enum(['all', 'yes', 'no'], {
-            errorMap: () => ({ message: 'কোর্স বরাদ্দের অবস্থা নির্বাচন করুন' })
+            message: 'কোর্স বরাদ্দের অবস্থা নির্বাচন করুন'
         })
         .default('all'),
     sortBy: z
         .enum(['name', 'employeeId', 'email', 'joinDate', 'assignedCourses'], {
-            errorMap: () => ({ message: 'সাজানোর ক্ষেত্র নির্বাচন করুন' })
+            message: 'সাজানোর ক্ষেত্র নির্বাচন করুন'
         })
         .default('joinDate'),
     sortOrder: z
         .enum(['asc', 'desc'], {
-            errorMap: () => ({ message: 'সাজানোর ক্রম নির্বাচন করুন' })
+            message: 'সাজানোর ক্রম নির্বাচন করুন'
         })
         .default('desc'),
 });
@@ -270,7 +270,7 @@ export const bulkTeacherOperationSchema = z.object({
         .min(1, 'অন্তত একজন শিক্ষক নির্বাচন করুন'),
     operation: z
         .enum(['activate', 'deactivate', 'set_on_leave', 'delete'], {
-            errorMap: () => ({ message: 'অপারেশন নির্বাচন করুন' })
+            message: 'অপারেশন নির্বাচন করুন'
         }),
     reason: z
         .string()

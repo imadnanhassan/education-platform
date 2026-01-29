@@ -10,7 +10,7 @@ export const courseMaterialSchema = z.object({
         .min(1, 'উপাদানের শিরোনাম প্রয়োজন')
         .max(200, 'শিরোনাম সর্বোচ্চ ২০০ অক্ষরের হতে পারে'),
     type: z
-        .enum(['video', 'pdf', 'mcq', 'assignment', 'quiz'], {
+        .enum(['video', 'pdf', 'mcq', 'assignment', 'quiz', 'text', 'audio'], {
             message: 'উপাদানের ধরন নির্বাচন করুন'
         }),
     content: z
@@ -134,7 +134,14 @@ export const courseSchema = z.object({
     thumbnail: z
         .string()
         .min(1, 'কোর্সের থাম্বনেইল প্রয়োজন')
-        .url('সঠিক থাম্বনেইল URL প্রদান করুন'),
+        .refine((url) => {
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }, 'সঠিক থাম্বনেইল URL প্রদান করুন'),
     instructor: z
         .string()
         .min(1, 'শিক্ষক নির্বাচন করুন'),
@@ -152,10 +159,9 @@ export const courseSchema = z.object({
         })
         .default('draft'),
     prerequisites: z
-        .string()
-        .max(1000, 'পূর্বশর্ত সর্বোচ্চ ১০০০ অক্ষরের হতে পারে')
-        .optional()
-        .or(z.literal('')),
+        .array(z.string())
+        .max(20, 'সর্বোচ্চ ২০টি পূর্বশর্ত যোগ করা যাবে')
+        .default([]),
     learningOutcomes: z
         .array(z.string())
         .max(20, 'সর্বোচ্চ ২০টি শিক্ষার ফলাফল যোগ করা যাবে')
@@ -171,6 +177,7 @@ export const courseSchema = z.object({
         .min(1, 'সর্বোচ্চ শিক্ষার্থী সংখ্যা কমপক্ষে ১ হতে হবে')
         .max(10000, 'সর্বোচ্চ শিক্ষার্থী সংখ্যা ১০,০০০ এর বেশি হতে পারে না')
         .optional(),
+  
 });
 
 // Course Filter Schema

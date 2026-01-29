@@ -34,6 +34,7 @@ export interface SocialLinks {
   twitter?: string;
   website?: string;
   youtube?: string;
+  github?: string;
 }
 
 export interface EmergencyContact {

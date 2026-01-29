@@ -1,7 +1,7 @@
 'use client';
 
+import TeacherList from '@/components/admin/teachers/TeacherList';
 import React from 'react';
-import { TeacherList } from '@/components/admin/teachers/TeacherList';
 
 const TeachersPage: React.FC = () => {
   return <TeacherList />;

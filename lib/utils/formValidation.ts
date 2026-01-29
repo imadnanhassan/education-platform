@@ -1,24 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UseFormProps, FieldValues, Path } from 'react-hook-form';
-import { ZodSchema, ZodError } from 'zod';
 
-// Generic form validation utility
-export function createFormResolver<T extends FieldValues>(schema: ZodSchema<T>) {
-    return zodResolver(schema);
-}
+import {  FieldValues } from 'react-hook-form';
 
-// Form configuration helper
-export function createFormConfig<T extends FieldValues>(
-    schema: ZodSchema<T>,
-    defaultValues?: Partial<T>
-): UseFormProps<T> {
-    return {
-        resolver: createFormResolver(schema),
-        defaultValues,
-        mode: 'onChange',
-        reValidateMode: 'onChange',
-    };
-}
+
+
 
 // Error message formatter for Bengali localization
 export function formatErrorMessage(error: string): string {
@@ -39,25 +23,7 @@ export function formatErrorMessage(error: string): string {
     return errorTranslations[error] || error;
 }
 
-// Field validation helper
-export function validateField<T extends FieldValues>(
-    schema: ZodSchema<T>,
-    fieldName: Path<T>,
-    value: any
-): string | undefined {
-    try {
-        const fieldSchema = schema.shape[fieldName];
-        if (fieldSchema) {
-            fieldSchema.parse(value);
-        }
-        return undefined;
-    } catch (error) {
-        if (error instanceof ZodError) {
-            return formatErrorMessage(error.errors[0]?.message || 'Invalid value');
-        }
-        return 'Validation error';
-    }
-}
+
 
 // Form data sanitizer
 export function sanitizeFormData<T extends FieldValues>(data: T): T {
@@ -97,7 +63,6 @@ export function validateFile(
     return { isValid: true };
 }
 
-// Image validation helper
 export function validateImage(file: File): Promise<{ isValid: boolean; error?: string; dimensions?: { width: number; height: number } }> {
     return new Promise((resolve) => {
         if (!file.type.startsWith('image/')) {
@@ -111,7 +76,6 @@ export function validateImage(file: File): Promise<{ isValid: boolean; error?: s
         img.onload = () => {
             URL.revokeObjectURL(url);
             
-            // Check minimum dimensions
             if (img.width < 100 || img.height < 100) {
                 resolve({
                     isValid: false,
@@ -120,7 +84,6 @@ export function validateImage(file: File): Promise<{ isValid: boolean; error?: s
                 return;
             }
             
-            // Check maximum dimensions
             if (img.width > 5000 || img.height > 5000) {
                 resolve({
                     isValid: false,
@@ -144,12 +107,9 @@ export function validateImage(file: File): Promise<{ isValid: boolean; error?: s
     });
 }
 
-// Phone number formatter
 export function formatPhoneNumber(phone: string): string {
-    // Remove all non-digit characters
     const digits = phone.replace(/\D/g, '');
     
-    // Format Bangladeshi phone numbers
     if (digits.startsWith('880')) {
         return `+${digits}`;
     } else if (digits.startsWith('01')) {
@@ -161,7 +121,6 @@ export function formatPhoneNumber(phone: string): string {
     return phone;
 }
 
-// Date validation helper
 export function validateDateRange(startDate: string, endDate: string): { isValid: boolean; error?: string } {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -177,7 +136,6 @@ export function validateDateRange(startDate: string, endDate: string): { isValid
     return { isValid: true };
 }
 
-// Age validation helper
 export function validateAge(dateOfBirth: string, minAge: number = 5, maxAge: number = 100): { isValid: boolean; error?: string; age?: number } {
     const birthDate = new Date(dateOfBirth);
     const today = new Date();
@@ -218,7 +176,6 @@ export function validateAge(dateOfBirth: string, minAge: number = 5, maxAge: num
     return { isValid: true, age };
 }
 
-// Password strength validator
 export function validatePasswordStrength(password: string): { 
     isValid: boolean; 
     score: number; 
@@ -259,7 +216,6 @@ export function validatePasswordStrength(password: string): {
     };
 }
 
-// Form submission helper
 export async function handleFormSubmission<T extends FieldValues>(
     data: T,
     submitFn: (data: T) => Promise<any>,
@@ -287,7 +243,6 @@ export async function handleFormSubmission<T extends FieldValues>(
     }
 }
 
-// Export commonly used validation patterns
 export const validationPatterns = {
     phone: /^(\+8801|01)[3-9]\d{8}$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,

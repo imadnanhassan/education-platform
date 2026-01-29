@@ -187,7 +187,7 @@ const CourseDetailPage = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                        {course.features.map((feature, index) => (
+                        {course.features?.map((feature, index) => (
                             <div key={index} className="bg-white border border-gray-100 p-6 text-center hover:border-emerald-200 transition-all duration-300">
                                 <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-4">
                                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@ const CourseDetailPage = () => {
                     <div className="bg-white border border-gray-100 p-8">
                         <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">আপনি যা শিখবেন</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {course.whatYouWillLearn.map((item, index) => (
+                            {course.whatYouWillLearn?.map((item, index) => (
                                 <div key={index} className="flex items-start p-4 bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100">
                                     <div className="w-6 h-6 bg-emerald-500 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
                                         <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -267,14 +267,14 @@ const CourseDetailPage = () => {
                             <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-8">
                                 <h3 className="text-2xl font-bold text-white mb-6">কোর্স সম্পর্কে বিস্তারিত</h3>
                                 <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                                    {course.fullDescription}
+                                    {course.fullDescription || course.description}
                                 </p>
 
                                 {/* Prerequisites */}
                                 <div className="mb-8">
                                     <h4 className="text-xl font-semibold text-white mb-4">পূর্বশর্ত</h4>
                                     <div className="space-y-3">
-                                        {course.prerequisites.map((prerequisite, index) => (
+                                        {course.prerequisites?.map((prerequisite, index) => (
                                             <div key={index} className="flex items-start">
                                                 <svg className="w-5 h-5 text-blue-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -288,11 +288,11 @@ const CourseDetailPage = () => {
                                 {/* Course Stats */}
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                     <div className="text-center p-4 backdrop-blur-xl bg-white/5 border border-white/10">
-                                        <div className="text-2xl font-bold text-emerald-400">{course.totalLessons}</div>
+                                        <div className="text-2xl font-bold text-emerald-400">{course.totalLessons || 0}</div>
                                         <div className="text-gray-300 text-sm">মোট লেসন</div>
                                     </div>
                                     <div className="text-center p-4 backdrop-blur-xl bg-white/5 border border-white/10">
-                                        <div className="text-2xl font-bold text-emerald-400">{course.totalHours}</div>
+                                        <div className="text-2xl font-bold text-emerald-400">{course.totalHours || 0}</div>
                                         <div className="text-gray-300 text-sm">মোট ঘন্টা</div>
                                     </div>
                                     <div className="text-center p-4 backdrop-blur-xl bg-white/5 border border-white/10">
@@ -312,7 +312,7 @@ const CourseDetailPage = () => {
                             <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-8">
                                 <h3 className="text-2xl font-bold text-white mb-6">কোর্স সিলেবাস</h3>
                                 <div className="space-y-4">
-                                    {course.curriculum.map((item, index) => (
+                                    {course.curriculum?.map((item, index) => (
                                         <div key={index} className="flex items-center p-4 backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
                                             <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-green-600 text-white flex items-center justify-center font-bold mr-4 flex-shrink-0">
                                                 {index + 1}
@@ -341,7 +341,7 @@ const CourseDetailPage = () => {
                                 <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
                                     <div className="flex-shrink-0">
                                         <img 
-                                            src={course.instructorImage} 
+                                            src={course.instructorImage || '/assets/images/user-profile.jpeg'} 
                                             alt={course.instructor}
                                             className="w-40 h-40 object-cover border-4 border-emerald-500"
                                         />
@@ -350,7 +350,7 @@ const CourseDetailPage = () => {
                                         <h4 className="text-3xl font-bold text-white mb-2">{course.instructor}</h4>
                                         <p className="text-emerald-400 font-medium text-lg mb-4">প্রধান শিক্ষক ও কোর্স ইন্সট্রাক্টর</p>
                                         <p className="text-gray-300 leading-relaxed mb-6 text-lg">
-                                            {course.instructorBio}
+                                            {course.instructorBio || 'অভিজ্ঞ শিক্ষক যিনি বছরের পর বছর ধরে শিক্ষার্থীদের সফল করে তুলেছেন।'}
                                         </p>
                                         
                                         {/* Instructor Stats */}

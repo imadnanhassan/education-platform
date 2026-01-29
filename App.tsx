@@ -1,6 +1,7 @@
 'use client';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Toaster } from 'sonner';
 import { IRootState } from '@/store';
 import { toggleRTL, toggleTheme, toggleMenu, toggleLayout, toggleAnimation, toggleNavbar, toggleSemidark } from '@/store/themeConfigSlice';
 import Loading from '@/components/layouts/loading';
@@ -33,6 +34,21 @@ function App({ children }: PropsWithChildren) {
             } main-section relative font-nunito text-sm font-normal antialiased`}
         >
             {isLoading ? <Loading /> : children}
+            
+            {/* Toast Notifications */}
+            <Toaster 
+                position="top-right"
+                richColors
+                closeButton
+                expand={true}
+                duration={4000}
+                toastOptions={{
+                    style: {
+                        fontFamily: 'var(--font-anek-bangla), var(--font-nunito), sans-serif',
+                    },
+                    className: 'text-sm',
+                }}
+            />
         </div>
     );
 }

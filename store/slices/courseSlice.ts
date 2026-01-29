@@ -301,7 +301,7 @@ const generateDummyCourses = (): Course[] => {
         level === 'beginner' ? 'প্রাথমিক' : level === 'intermediate' ? 'মধ্যম' : 'উন্নত',
         category.name,
       ],
-      prerequisites: index % 3 === 0 ? 'মাধ্যমিক স্তরের জ্ঞান প্রয়োজন' : undefined,
+      prerequisites: index % 3 === 0 ? ['মাধ্যমিক স্তরের জ্ঞান প্রয়োজন'] : [],
       learningOutcomes: [
         `${course.bn} এর মূল ধারণা বুঝতে পারবেন`,
         'ব্যবহারিক সমস্যা সমাধান করতে পারবেন',

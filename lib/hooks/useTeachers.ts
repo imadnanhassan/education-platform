@@ -34,7 +34,7 @@ export const useTeachers = () => {
   // Fetch teachers with filters and pagination
   const getTeachers = useCallback(
     (params?: { page?: number; limit?: number; filters?: TeacherFilters }) => {
-      return dispatch(fetchTeachers(params || {}));
+      return dispatch(fetchTeachers(params || {}) as any);
     },
     [dispatch]
   );
@@ -42,7 +42,7 @@ export const useTeachers = () => {
   // Fetch single teacher by ID
   const getTeacherById = useCallback(
     (teacherId: string) => {
-      return dispatch(fetchTeacherById(teacherId));
+      return dispatch(fetchTeacherById(teacherId) as any);
     },
     [dispatch]
   );
@@ -50,7 +50,7 @@ export const useTeachers = () => {
   // Create new teacher
   const addTeacher = useCallback(
     (teacherData: CreateTeacherRequest) => {
-      return dispatch(createTeacher(teacherData));
+      return dispatch(createTeacher(teacherData) as any);
     },
     [dispatch]
   );
@@ -58,7 +58,7 @@ export const useTeachers = () => {
   // Update existing teacher
   const editTeacher = useCallback(
     (teacherData: UpdateTeacherRequest) => {
-      return dispatch(updateTeacher(teacherData));
+      return dispatch(updateTeacher(teacherData) as any);
     },
     [dispatch]
   );
@@ -66,7 +66,7 @@ export const useTeachers = () => {
   // Delete teacher
   const removeTeacher = useCallback(
     (teacherId: string) => {
-      return dispatch(deleteTeacher(teacherId));
+      return dispatch(deleteTeacher(teacherId) as any);
     },
     [dispatch]
   );
@@ -74,7 +74,7 @@ export const useTeachers = () => {
   // Assign courses to teacher
   const assignCoursesToTeacher = useCallback(
     (assignmentData: AssignCoursesRequest) => {
-      return dispatch(assignCourses(assignmentData));
+      return dispatch(assignCourses(assignmentData) as any);
     },
     [dispatch]
   );
@@ -82,60 +82,60 @@ export const useTeachers = () => {
   // Bulk operations on teachers
   const performBulkOperation = useCallback(
     (operationData: BulkTeacherOperation) => {
-      return dispatch(bulkUpdateTeachers(operationData));
+      return dispatch(bulkUpdateTeachers(operationData) as any);
     },
     [dispatch]
   );
 
   // Fetch teacher statistics
   const getTeacherStats = useCallback(() => {
-    return dispatch(fetchTeacherStats());
+    return dispatch(fetchTeacherStats() as any);
   }, [dispatch]);
 
   // Filter management
   const updateFilters = useCallback(
     (filters: Partial<TeacherFilters>) => {
-      dispatch(setFilters(filters));
+      dispatch(setFilters(filters) as any);
     },
     [dispatch]
   );
 
   const resetFilters = useCallback(() => {
-    dispatch(clearFilters());
+    dispatch(clearFilters() as any);
   }, [dispatch]);
 
   // Selection management
   const updateSelectedTeachers = useCallback(
     (teacherIds: string[]) => {
-      dispatch(setSelectedTeachers(teacherIds));
+      dispatch(setSelectedTeachers(teacherIds) as any);
     },
     [dispatch]
   );
 
   const toggleSelection = useCallback(
     (teacherId: string) => {
-      dispatch(toggleTeacherSelection(teacherId));
+      dispatch(toggleTeacherSelection(teacherId) as any);
     },
     [dispatch]
   );
 
   const selectAll = useCallback(() => {
-    dispatch(selectAllTeachers());
+    dispatch(selectAllTeachers() as any);
   }, [dispatch]);
 
   const clearSelections = useCallback(() => {
-    dispatch(clearSelection());
+    dispatch(clearSelection() as any);
   }, [dispatch]);
 
   // Error management
   const clearErrors = useCallback(() => {
-    dispatch(clearError());
+    dispatch(clearError() as any);
   }, [dispatch]);
 
   // Current teacher management
   const setActiveTeacher = useCallback(
     (teacher: any) => {
-      dispatch(setCurrentTeacher(teacher));
+      dispatch(setCurrentTeacher(teacher) as any);
     },
     [dispatch]
   );

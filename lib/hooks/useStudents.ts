@@ -49,7 +49,7 @@ export const useStudents = () => {
 
   // Actions
   const loadStudents = useCallback((filters?: StudentFilter) => {
-    return dispatch(fetchStudents(filters) as any);
+    return dispatch(fetchStudents(filters || {}) as any);
   }, [dispatch]);
 
   const loadStudentById = useCallback((studentId: string) => {

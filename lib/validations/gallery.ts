@@ -57,7 +57,7 @@ export const galleryItemSchema = z.object({
         .or(z.literal('')),
     type: z
         .enum(['photo', 'video'], {
-            errorMap: () => ({ message: 'মিডিয়ার ধরন নির্বাচন করুন' })
+             message: 'মিডিয়ার ধরন নির্বাচন করুন'
         }),
     url: z
         .string()
@@ -71,7 +71,7 @@ export const galleryItemSchema = z.object({
         .or(z.literal('')),
     category: z
         .enum(['general', 'events', 'clubs', 'achievements', 'campus', 'students', 'teachers'], {
-            errorMap: () => ({ message: 'ক্যাটেগরি নির্বাচন করুন' })
+            message: 'ক্যাটেগরি নির্বাচন করুন'
         }),
     tags: z
         .array(z.string())
@@ -152,7 +152,7 @@ export const albumSchema = z.object({
         .url('সঠিক কভার ছবির URL প্রদান করুন'),
     category: z
         .enum(['general', 'events', 'clubs', 'achievements', 'campus', 'students', 'teachers'], {
-            errorMap: () => ({ message: 'ক্যাটেগরি নির্বাচন করুন' })
+           message: 'ক্যাটেগরি নির্বাচন করুন' 
         }),
     tags: z
         .array(z.string())
@@ -174,7 +174,7 @@ export const albumSchema = z.object({
         .optional(),
     sortOrder: z
         .enum(['date_asc', 'date_desc', 'title_asc', 'title_desc', 'manual'], {
-            errorMap: () => ({ message: 'সাজানোর ক্রম নির্বাচন করুন' })
+           message: 'সাজানোর ক্রম নির্বাচন করুন'
         })
         .default('date_desc'),
     clubId: z
@@ -196,12 +196,12 @@ export const galleryFilterSchema = z.object({
         .or(z.literal('')),
     type: z
         .enum(['all', 'photo', 'video'], {
-            errorMap: () => ({ message: 'মিডিয়ার ধরন নির্বাচন করুন' })
+            message: 'মিডিয়ার ধরন নির্বাচন করুন'
         })
         .default('all'),
     category: z
         .enum(['all', 'general', 'events', 'clubs', 'achievements', 'campus', 'students', 'teachers'], {
-            errorMap: () => ({ message: 'ক্যাটেগরি নির্বাচন করুন' })
+            message: 'ক্যাটেগরি নির্বাচন করুন' 
         })
         .default('all'),
     albumId: z
@@ -214,12 +214,12 @@ export const galleryFilterSchema = z.object({
         .or(z.literal('')),
     isPublic: z
         .enum(['all', 'public', 'private'], {
-            errorMap: () => ({ message: 'দৃশ্যমানতা নির্বাচন করুন' })
+            message: 'দৃশ্যমানতা নির্বাচন করুন' 
         })
         .default('all'),
     isFeatured: z
         .enum(['all', 'featured', 'not_featured'], {
-            errorMap: () => ({ message: 'ফিচার অবস্থা নির্বাচন করুন' })
+           message: 'ফিচার অবস্থা নির্বাচন করুন'
         })
         .default('all'),
     tags: z
@@ -248,12 +248,12 @@ export const galleryFilterSchema = z.object({
         .or(z.literal('')),
     sortBy: z
         .enum(['createdAt', 'title', 'capturedDate', 'size', 'views'], {
-            errorMap: () => ({ message: 'সাজানোর ক্ষেত্র নির্বাচন করুন' })
+            message: 'সাজানোর ক্ষেত্র নির্বাচন করুন'
         })
         .default('createdAt'),
     sortOrder: z
         .enum(['asc', 'desc'], {
-            errorMap: () => ({ message: 'সাজানোর ক্রম নির্বাচন করুন' })
+            message: 'সাজানোর ক্রম নির্বাচন করুন'
         })
         .default('desc'),
 });
@@ -265,7 +265,7 @@ export const bulkGalleryOperationSchema = z.object({
         .min(1, 'অন্তত একটি আইটেম নির্বাচন করুন'),
     operation: z
         .enum(['delete', 'make_public', 'make_private', 'feature', 'unfeature', 'move_to_album', 'add_tags', 'remove_tags'], {
-            errorMap: () => ({ message: 'অপারেশন নির্বাচন করুন' })
+            message: 'অপারেশন নির্বাচন করুন'
         }),
     targetAlbumId: z
         .string()
@@ -309,7 +309,7 @@ export const mediaUploadSchema = z.object({
         .or(z.literal('')),
     category: z
         .enum(['general', 'events', 'clubs', 'achievements', 'campus', 'students', 'teachers'], {
-            errorMap: () => ({ message: 'ক্যাটেগরি নির্বাচন করুন' })
+            message: 'ক্যাটেগরি নির্বাচন করুন'
         })
         .default('general'),
     tags: z
@@ -375,7 +375,7 @@ export const gallerySettingsSchema = z.object({
         .default(false),
     defaultVisibility: z
         .enum(['public', 'private'], {
-            errorMap: () => ({ message: 'ডিফল্ট দৃশ্যমানতা নির্বাচন করুন' })
+            message: 'ডিফল্ট দৃশ্যমানতা নির্বাচন করুন'
         })
         .default('public'),
 });

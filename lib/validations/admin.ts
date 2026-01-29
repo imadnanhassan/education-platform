@@ -27,7 +27,7 @@ export const adminUserSchema = z.object({
         .regex(phoneRegex, 'সঠিক বাংলাদেশি ফোন নম্বর লিখুন'),
     role: z
         .enum(['super_admin', 'admin', 'moderator', 'content_manager'], {
-            errorMap: () => ({ message: 'সঠিক ভূমিকা নির্বাচন করুন' })
+            message: 'সঠিক ভূমিকা নির্বাচন করুন'
         }),
     avatar: z
         .string()
@@ -99,7 +99,7 @@ export const systemSettingsSchema = z.object({
         .min(1, 'টাইমজোন নির্বাচন করুন'),
     language: z
         .enum(['bn', 'en'], {
-            errorMap: () => ({ message: 'ভাষা নির্বাচন করুন' })
+            message: 'ভাষা নির্বাচন করুন'
         }),
     maintenanceMode: z.boolean().default(false),
     registrationEnabled: z.boolean().default(true),

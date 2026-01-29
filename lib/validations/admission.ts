@@ -11,7 +11,7 @@ const applicationIdRegex = /^ADM\d{7}$/; // Format: ADM2024001
 export const documentSchema = z.object({
     type: z
         .enum(['photo', 'certificate', 'transcript', 'id_card', 'birth_certificate', 'other'], {
-            errorMap: () => ({ message: 'ডকুমেন্টের ধরন নির্বাচন করুন' })
+            message: 'ডকুমেন্টের ধরন নির্বাচন করুন'
         }),
     name: z
         .string()
@@ -93,7 +93,7 @@ export const applicantInfoSchema = z.object({
         }, 'বয়স ৫ থেকে ১০০ বছরের মধ্যে হতে হবে'),
     gender: z
         .enum(['male', 'female', 'other'], {
-            errorMap: () => ({ message: 'লিঙ্গ নির্বাচন করুন' })
+            message: 'লিঙ্গ নির্বাচন করুন'
         }),
     address: addressSchema,
     guardian: guardianSchema,
@@ -108,7 +108,7 @@ export const applicantInfoSchema = z.object({
         .max(50, 'ধর্ম সর্বোচ্চ ৫০ অক্ষরের হতে পারে'),
     bloodGroup: z
         .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], {
-            errorMap: () => ({ message: 'রক্তের গ্রুপ নির্বাচন করুন' })
+            message: 'রক্তের গ্রুপ নির্বাচন করুন'
         })
         .optional(),
     emergencyContact: z.object({
@@ -150,7 +150,7 @@ export const admissionRequestSchema = z.object({
         .max(10, 'সর্বোচ্চ ১০টি ডকুমেন্ট আপলোড করা যাবে'),
     status: z
         .enum(['pending', 'under_review', 'approved', 'rejected', 'waitlisted'], {
-            errorMap: () => ({ message: 'আবেদনের অবস্থা নির্বাচন করুন' })
+            message: 'আবেদনের অবস্থা নির্বাচন করুন'
         })
         .default('pending'),
     applicationFee: z
@@ -160,7 +160,7 @@ export const admissionRequestSchema = z.object({
         .default(500),
     paymentStatus: z
         .enum(['pending', 'paid', 'failed', 'refunded'], {
-            errorMap: () => ({ message: 'পেমেন্টের অবস্থা নির্বাচন করুন' })
+            message: 'পেমেন্টের অবস্থা নির্বাচন করুন'
         })
         .default('pending'),
     specialRequirements: z
@@ -170,7 +170,7 @@ export const admissionRequestSchema = z.object({
         .or(z.literal('')),
     howDidYouHear: z
         .enum(['website', 'facebook', 'friend', 'teacher', 'advertisement', 'other'], {
-            errorMap: () => ({ message: 'কীভাবে জানলেন তা নির্বাচন করুন' })
+            message: 'কীভাবে জানলেন তা নির্বাচন করুন'
         })
         .optional(),
     agreeToTerms: z
@@ -187,7 +187,7 @@ export const admissionReviewSchema = z.object({
         .min(1, 'আবেদন আইডি প্রয়োজন'),
     status: z
         .enum(['approved', 'rejected', 'waitlisted'], {
-            errorMap: () => ({ message: 'সিদ্ধান্ত নির্বাচন করুন' })
+            message: 'সিদ্ধান্ত নির্বাচন করুন'
         }),
     reviewNotes: z
         .string()
@@ -232,12 +232,12 @@ export const admissionFilterSchema = z.object({
         .or(z.literal('')),
     status: z
         .enum(['all', 'pending', 'under_review', 'approved', 'rejected', 'waitlisted'], {
-            errorMap: () => ({ message: 'অবস্থা নির্বাচন করুন' })
+            message: 'অবস্থা নির্বাচন করুন'
         })
         .default('all'),
     paymentStatus: z
         .enum(['all', 'pending', 'paid', 'failed', 'refunded'], {
-            errorMap: () => ({ message: 'পেমেন্টের অবস্থা নির্বাচন করুন' })
+            message: 'পেমেন্টের অবস্থা নির্বাচন করুন'
         })
         .default('all'),
     coursePreference: z
@@ -246,12 +246,12 @@ export const admissionFilterSchema = z.object({
         .or(z.literal('')),
     gender: z
         .enum(['all', 'male', 'female', 'other'], {
-            errorMap: () => ({ message: 'লিঙ্গ নির্বাচন করুন' })
+            message: 'লিঙ্গ নির্বাচন করুন'
         })
         .default('all'),
     ageRange: z
         .enum(['all', '5-10', '11-15', '16-20', '21-25', '26+'], {
-            errorMap: () => ({ message: 'বয়সের পরিসর নির্বাচন করুন' })
+            message: 'বয়সের পরিসর নির্বাচন করুন'
         })
         .default('all'),
     submissionDateFrom: z
@@ -268,12 +268,12 @@ export const admissionFilterSchema = z.object({
         .or(z.literal('')),
     sortBy: z
         .enum(['submittedAt', 'applicantName', 'status', 'reviewedAt'], {
-            errorMap: () => ({ message: 'সাজানোর ক্ষেত্র নির্বাচন করুন' })
+            message: 'সাজানোর ক্ষেত্র নির্বাচন করুন'
         })
         .default('submittedAt'),
     sortOrder: z
         .enum(['asc', 'desc'], {
-            errorMap: () => ({ message: 'সাজানোর ক্রম নির্বাচন করুন' })
+            message: 'সাজানোর ক্রম নির্বাচন করুন'
         })
         .default('desc'),
 });
@@ -285,7 +285,7 @@ export const bulkAdmissionOperationSchema = z.object({
         .min(1, 'অন্তত একটি আবেদন নির্বাচন করুন'),
     operation: z
         .enum(['approve', 'reject', 'move_to_review', 'send_reminder'], {
-            errorMap: () => ({ message: 'অপারেশন নির্বাচন করুন' })
+           message: 'অপারেশন নির্বাচন করুন'
         }),
     reason: z
         .string()
@@ -315,7 +315,7 @@ export const admissionStatsFilterSchema = z.object({
         .or(z.literal('')),
     groupBy: z
         .enum(['day', 'week', 'month'], {
-            errorMap: () => ({ message: 'গ্রুপিং পদ্ধতি নির্বাচন করুন' })
+           message: 'গ্রুপিং পদ্ধতি নির্বাচন করুন'
         })
         .default('month'),
 });

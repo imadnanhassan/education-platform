@@ -431,12 +431,77 @@ const AdminSidebar: React.FC = () => {
                 </li>
 
                 <li className="nav-item">
-                  <Link href="/admin-magazine" className={`${isActive('/admin-magazine') ? 'active' : ''} group nav-link`}>
+                  <Link href="/admin-made-easy" className={`${isActive('/admin-made-easy') ? 'active' : ''} group nav-link`}>
                     <div className="flex items-center">
-                      <IconNotes className="shrink-0 group-hover:!text-primary" />
+                      <IconBook className="shrink-0 group-hover:!text-primary" />
                       {!sidebarCollapsed && (
                         <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
-                          ম্যাগাজিন ব্যবস্থাপনা
+                          Made Easy ব্যবস্থাপনা
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/admin-fly-to-abroad" className={`${isActive('/admin-fly-to-abroad') ? 'active' : ''} group nav-link`}>
+                    <div className="flex items-center">
+                      <IconGallery className="shrink-0 group-hover:!text-primary" />
+                      {!sidebarCollapsed && (
+                        <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                          বিদেশে পড়াশোনা
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/admin-scholarship" className={`${isActive('/admin-scholarship') ? 'active' : ''} group nav-link`}>
+                    <div className="flex items-center">
+                      <IconBarChart className="shrink-0 group-hover:!text-primary" />
+                      {!sidebarCollapsed && (
+                        <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                          বৃত্তি ব্যবস্থাপনা
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/admin-membership" className={`${isActive('/admin-membership') ? 'active' : ''} group nav-link`}>
+                    <div className="flex items-center">
+                      <IconUsers className="shrink-0 group-hover:!text-primary" />
+                      {!sidebarCollapsed && (
+                        <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                          সদস্যপদ ব্যবস্থাপনা
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/admin-contact" className={`${isActive('/admin-contact') ? 'active' : ''} group nav-link`}>
+                    <div className="flex items-center">
+                      <IconInbox className="shrink-0 group-hover:!text-primary" />
+                      {!sidebarCollapsed && (
+                        <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                          যোগাযোগ ব্যবস্থাপনা
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/admin-about" className={`${isActive('/admin-about') ? 'active' : ''} group nav-link`}>
+                    <div className="flex items-center">
+                      <IconSettings className="shrink-0 group-hover:!text-primary" />
+                      {!sidebarCollapsed && (
+                        <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">
+                          আমাদের সম্পর্কে
                         </span>
                       )}
                     </div>

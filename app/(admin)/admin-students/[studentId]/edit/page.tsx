@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useStudents } from '@/lib/hooks/useStudents';
 import { StudentForm } from '@/components/admin/students/StudentForm';
-import { UpdateStudentFormData } from '@/store/types/student';
+import { UpdateStudentFormData, CreateStudentFormData } from '@/store/types/student';
 
 interface EditStudentPageProps {
   params: {
@@ -22,9 +22,14 @@ const EditStudentPage: React.FC<EditStudentPageProps> = ({ params }) => {
     }
   }, [params.studentId, loadStudentById]);
 
-  const handleSubmit = async (data: UpdateStudentFormData) => {
+  const handleSubmit = async (data: CreateStudentFormData | UpdateStudentFormData) => {
     try {
-      await updateExistingStudent(params.studentId, data);
+      // Add the student ID to the data for update operations
+      const updateData: UpdateStudentFormData = {
+        ...data,
+        id: params.studentId,
+      };
+      await updateExistingStudent(params.studentId, updateData);
       router.push(`/admin-students/${params.studentId}`);
     } catch (error) {
       console.error('Error updating student:', error);

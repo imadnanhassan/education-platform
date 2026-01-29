@@ -10,7 +10,6 @@ import {
   createCourse,
   updateCourse,
   deleteCourse,
-  publishCourse,
   validateCourseForPublishing,
   changeCourseStatus,
   publishCourseWithValidation,
@@ -64,121 +63,121 @@ export const useCourses = () => {
   // Load courses with filters
   const loadCourses = useCallback((courseFilters?: Partial<CourseFilter>) => {
     const finalFilters = courseFilters ? { ...filters, ...courseFilters } : filters;
-    dispatch(fetchCourses(finalFilters));
+    dispatch(fetchCourses(finalFilters) as any);
   }, [dispatch, filters]);
 
   // Load course by ID
   const loadCourseById = useCallback((courseId: string) => {
-    dispatch(fetchCourseById(courseId));
+    dispatch(fetchCourseById(courseId) as any);
   }, [dispatch]);
 
   // Load course categories
   const loadCategories = useCallback(() => {
-    dispatch(fetchCourseCategories());
+    dispatch(fetchCourseCategories() as any);
   }, [dispatch]);
 
   // Load course statistics
   const loadCourseStats = useCallback(() => {
-    dispatch(fetchCourseStats());
+    dispatch(fetchCourseStats() as any);
   }, [dispatch]);
 
   // Create new course
   const createNewCourse = useCallback((courseData: CreateCourseFormData) => {
-    return dispatch(createCourse(courseData));
+    return dispatch(createCourse(courseData) as any);
   }, [dispatch]);
 
   // Update existing course
   const updateExistingCourse = useCallback((id: string, courseData: UpdateCourseFormData) => {
-    return dispatch(updateCourse({ id, data: courseData }));
+    return dispatch(updateCourse({ id, data: courseData }) as any);
   }, [dispatch]);
 
   // Delete course
   const removeCourse = useCallback((courseId: string) => {
-    return dispatch(deleteCourse(courseId));
+    return dispatch(deleteCourse(courseId) as any);
   }, [dispatch]);
 
   // Publish course
   const publishExistingCourse = useCallback((publishInfo: CoursePublishInfo) => {
-    return dispatch(publishCourse(publishInfo));
+    return dispatch(publishCourseWithValidation(publishInfo) as any);
   }, [dispatch]);
 
   // Validate course for publishing
   const validateCourse = useCallback((courseId: string) => {
-    return dispatch(validateCourseForPublishing(courseId));
+    return dispatch(validateCourseForPublishing(courseId) as any);
   }, [dispatch]);
 
   // Change course status
   const changeStatus = useCallback((statusChangeInfo: CourseStatusChangeInfo) => {
-    return dispatch(changeCourseStatus(statusChangeInfo));
+    return dispatch(changeCourseStatus(statusChangeInfo) as any);
   }, [dispatch]);
 
   // Publish course with validation
   const publishWithValidation = useCallback((publishInfo: CoursePublishInfo) => {
-    return dispatch(publishCourseWithValidation(publishInfo));
+    return dispatch(publishCourseWithValidation(publishInfo) as any);
   }, [dispatch]);
 
   // Bulk operations
   const performBulkOperation = useCallback((operation: BulkCourseOperation) => {
-    return dispatch(bulkUpdateCourses(operation));
+    return dispatch(bulkUpdateCourses(operation) as any);
   }, [dispatch]);
 
   // Filter management
   const updateFilters = useCallback((newFilters: Partial<CourseFilter>) => {
-    dispatch(setFilters(newFilters));
+    dispatch(setFilters(newFilters) as any);
   }, [dispatch]);
 
   const resetFilters = useCallback(() => {
-    dispatch(clearFilters());
+    dispatch(clearFilters() as any);
   }, [dispatch]);
 
   // Selection management
   const toggleSelection = useCallback((courseId: string) => {
-    dispatch(toggleCourseSelection(courseId));
+    dispatch(toggleCourseSelection(courseId) as any);
   }, [dispatch]);
 
   const selectAll = useCallback(() => {
-    dispatch(selectAllCourses());
+    dispatch(selectAllCourses() as any);
   }, [dispatch]);
 
   const clearSelections = useCallback(() => {
-    dispatch(clearSelection());
+    dispatch(clearSelection() as any);
   }, [dispatch]);
 
   const setSelections = useCallback((courseIds: string[]) => {
-    dispatch(setSelectedCourses(courseIds));
+    dispatch(setSelectedCourses(courseIds) as any);
   }, [dispatch]);
 
   // Recently viewed management
   const addToRecent = useCallback((course: any) => {
-    dispatch(addToRecentlyViewed(course));
+    dispatch(addToRecentlyViewed(course) as any);
   }, [dispatch]);
 
   // Publish queue management
   const addToQueue = useCallback((publishInfo: CoursePublishInfo) => {
-    dispatch(addToPublishQueue(publishInfo));
+    dispatch(addToPublishQueue(publishInfo) as any);
   }, [dispatch]);
 
   const removeFromQueue = useCallback((courseId: string) => {
-    dispatch(removeFromPublishQueue(courseId));
+    dispatch(removeFromPublishQueue(courseId) as any);
   }, [dispatch]);
 
   // Error management
   const clearAllErrors = useCallback(() => {
-    dispatch(clearErrors());
+    dispatch(clearErrors() as any);
   }, [dispatch]);
 
   // Current course management
   const setCurrent = useCallback((course: any) => {
-    dispatch(setCurrentCourse(course));
+    dispatch(setCurrentCourse(course) as any);
   }, [dispatch]);
 
   // Validation management
   const clearValidations = useCallback(() => {
-    dispatch(clearValidationResults());
+    dispatch(clearValidationResults() as any);
   }, [dispatch]);
 
   const setValidation = useCallback((courseId: string, result: any) => {
-    dispatch(setValidationResult({ courseId, result }));
+    dispatch(setValidationResult({ courseId, result }) as any);
   }, [dispatch]);
 
   // Computed values
