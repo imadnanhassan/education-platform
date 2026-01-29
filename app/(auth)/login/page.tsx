@@ -3,12 +3,20 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 import AuthLayout from '@/components/layouts/auth/AuthLayout';
 import { loginSchema, type LoginFormData } from '@/lib/validations/auth';
 import { cn } from '@/utils/cn';
+import { demoLogin } from '@/store/slices/authSlice';
+import { IRootState } from '@/store';
+import store from '@/store';
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { loading, error, demoCredentials } = useSelector((state: IRootState) => state.auth);
     const [loginType, setLoginType] = useState<'student' | 'admin'>('student');
     const [showPassword, setShowPassword] = useState(false);
 
@@ -29,10 +37,25 @@ const LoginPage = () => {
 
     const onSubmit = async (data: LoginFormData) => {
         try {
-            // Handle login logic
-            console.log('Login attempt:', { ...data, type: loginType });
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Use demo login for now
+            dispatch(demoLogin({
+                email: data.email,
+                password: data.password
+            }));
+            
+            // Check if login was successful and redirect based on role
+            setTimeout(() => {
+                const state = store.getState();
+                if (state.auth.isAuthenticated) {
+                    const user = state.auth.user;
+                    if (user?.role.name === 'super_admin' || user?.role.name === 'admin') {
+                        router.push('/dashboard');
+                    } else {
+                        // For student or other roles, redirect to frontend
+                        router.push('/');
+                    }
+                }
+            }, 100);
         } catch (error) {
             console.error('Login error:', error);
         }
@@ -40,11 +63,11 @@ const LoginPage = () => {
 
     const fillDemoCredentials = () => {
         if (loginType === 'student') {
-            setValue('email', 'student@graviton.com');
-            setValue('password', 'student123');
+            setValue('email', demoCredentials.student.email);
+            setValue('password', demoCredentials.student.password);
         } else {
-            setValue('email', 'admin@graviton.com');
-            setValue('password', 'admin123');
+            setValue('email', demoCredentials.admin.email);
+            setValue('password', demoCredentials.admin.password);
         }
     };
 
@@ -101,6 +124,12 @@ const LoginPage = () => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* Error Message */}
+                {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                        {error}
+                    </div>
+                )}
                 {/* Email Field */}
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -193,10 +222,10 @@ const LoginPage = () => {
                 {/* Submit Button */}
                 <Button 
                     type="submit" 
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || loading}
                     className="w-full py-3 text-base font-medium bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {isSubmitting ? (
+                    {(isSubmitting || loading) ? (
                         <div className="flex items-center justify-center">
                             <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -230,13 +259,13 @@ const LoginPage = () => {
                 <div className="text-xs text-primary-700 space-y-1">
                     {loginType === 'student' ? (
                         <>
-                            <p><strong>ইমেইল:</strong> student@graviton.com</p>
-                            <p><strong>পাসওয়ার্ড:</strong> student123</p>
+                            <p><strong>ইমেইল:</strong> {demoCredentials.student.email}</p>
+                            <p><strong>পাসওয়ার্ড:</strong> {demoCredentials.student.password}</p>
                         </>
                     ) : (
                         <>
-                            <p><strong>ইমেইল:</strong> admin@graviton.com</p>
-                            <p><strong>পাসওয়ার্ড:</strong> admin123</p>
+                            <p><strong>ইমেইল:</strong> {demoCredentials.admin.email}</p>
+                            <p><strong>পাসওয়ার্ড:</strong> {demoCredentials.admin.password}</p>
                         </>
                     )}
                 </div>

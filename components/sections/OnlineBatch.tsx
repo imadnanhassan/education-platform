@@ -22,7 +22,7 @@ const OnlineBatch: React.FC = () => {
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {/* Live Class Card */}
                     <div className="group relative">
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>

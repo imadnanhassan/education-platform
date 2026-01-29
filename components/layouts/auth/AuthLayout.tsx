@@ -55,27 +55,27 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             </div>
 
             {/* Right Side - Form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-                <div className="w-full max-w-md">
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+                <div className="w-full max-w-sm sm:max-w-md">
                     {/* Mobile Logo */}
-                    <div className="lg:hidden text-center mb-8">
+                    <div className="lg:hidden text-center mb-4 sm:mb-6 lg:mb-8">
                         <Link href="/" className="inline-block">
                             <img 
                                 src="/assets/images/logo.svg" 
                                 alt="গ্র্যাভিটন একাডেমি" 
-                                className="h-12 w-auto mx-auto"
+                                className="h-10 sm:h-12 w-auto mx-auto"
                             />
                         </Link>
-                        <h2 className="mt-4 text-2xl font-bold text-gray-900">
+                        <h2 className="mt-3 sm:mt-4 text-xl sm:text-2xl font-bold text-gray-900">
                             গ্র্যাভিটন একাডেমি
                         </h2>
                     </div>
 
                     {/* Form Card */}
-                    <div className="bg-white border border-gray-200 p-8">
+                    <div className="bg-white border border-gray-200 p-4 sm:p-6 lg:p-8">
                         {/* Header */}
-                        <div className="text-center mb-8">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                        <div className="text-center mb-6 sm:mb-8">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                                 {title}
                             </h3>
                             {subtitle && (

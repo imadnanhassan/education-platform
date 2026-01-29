@@ -182,28 +182,28 @@ const AdmissionPage: React.FC = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4">
                         <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
                             Graviton Academy
                         </span>
                     </h1>
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">ভর্তির আবেদনপত্র</h2>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-2">ভর্তির আবেদনপত্র</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         আপনার শিক্ষার যাত্রা শুরু করতে নিচের ফর্মটি সম্পূর্ণ করুন। সকল তথ্য সঠিকভাবে পূরণ করুন।
                     </p>
                 </div>
 
                 {/* Form */}
-                <div className="bg-white border border-gray-200 p-8 lg:p-12">
-                    <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="bg-white border border-gray-200 p-4 sm:p-6 lg:p-8 xl:p-12">
+                    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                         {/* Personal Information */}
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6 pb-2 border-b-2 border-emerald-500">
                                 ব্যক্তিগত তথ্য
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label htmlFor="studentName" className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label htmlFor="studentName" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                                         শিক্ষার্থীর নাম *
                                     </label>
                                     <input
@@ -213,7 +213,7 @@ const AdmissionPage: React.FC = () => {
                                         value={formData.studentName}
                                         onChange={handleInputChange}
                                         required
-                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors duration-300"
+                                        className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors duration-300"
                                         placeholder="শিক্ষার্থীর পূর্ণ নাম লিখুন"
                                     />
                                 </div>
@@ -270,10 +270,10 @@ const AdmissionPage: React.FC = () => {
 
                         {/* Contact Information */}
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-emerald-500">
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6 pb-2 border-b-2 border-emerald-500">
                                 যোগাযোগের তথ্য
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                 <div className="md:col-span-2">
                                     <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
                                         ঠিকানা *

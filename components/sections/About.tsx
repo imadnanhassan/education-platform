@@ -18,7 +18,7 @@ const About: React.FC = () => {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
                         <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
                             আমাদের সম্পর্কে
                         </span>
@@ -90,7 +90,7 @@ const About: React.FC = () => {
                         </div>
 
                         {/* Achievement Stats */}
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-2 sm:gap-4">
                             <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 text-center border border-emerald-100">
                                 <div className="text-3xl font-bold text-emerald-600 mb-2">{aboutInfo.achievements.students}+</div>
                                 <div className="text-gray-600 text-sm font-medium">সফল শিক্ষার্থী</div>

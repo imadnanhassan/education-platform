@@ -221,7 +221,7 @@ const MainHeader: React.FC = () => {
                 
                 {/* Sidebar */}
                 <div className={cn(
-                    'absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white border-l border-gray-200 transform transition-transform duration-300 ease-in-out',
+                    'absolute right-0 top-0 h-full w-72 sm:w-80 max-w-[90vw] bg-white border-l border-gray-200 transform transition-transform duration-300 ease-in-out',
                     isOpen ? 'translate-x-0' : 'translate-x-full'
                 )}>
                     {/* Sidebar Header */}
@@ -265,7 +265,7 @@ const MainHeader: React.FC = () => {
                                         <Link
                                             href={item.href}
                                             className={cn(
-                                                'flex-1 flex items-center px-3 py-3 rounded-lg text-base font-medium transition-all duration-200',
+                                                'flex-1 flex items-center px-2 py-2 sm:px-3 sm:py-3 rounded-lg text-base font-medium transition-all duration-200',
                                                 pathname === item.href || pathname.startsWith(item.href + '/')
                                                     ? 'text-primary-700 bg-primary-50 border-l-4 border-primary-500'
                                                     : 'text-gray-700 hover:text-primary-700 hover:bg-primary-50'
@@ -302,7 +302,7 @@ const MainHeader: React.FC = () => {
                                     {item.submenu && (
                                         <div className={cn(
                                             'ml-4 mt-2 space-y-1 transition-all duration-300 overflow-hidden',
-                                            activeSubmenu === item.href ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                                            activeSubmenu === item.href ? 'max-h-64 sm:max-h-96 opacity-100' : 'max-h-0 opacity-0'
                                         )}>
                                             {item.submenu.map((subItem) => (
                                                 <Link

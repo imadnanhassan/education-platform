@@ -88,23 +88,23 @@ const CoursesPage = () => {
                     }}></div>
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-b border-gray-100">
-                    <div className="flex flex-wrap items-center justify-between gap-6">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 border-b border-gray-100">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 mb-2">কোর্স ফিল্টার</h2>
-                            <p className="text-gray-600">আপনার পছন্দের কোর্স খুঁজে নিন</p>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">কোর্স ফিল্টার</h2>
+                            <p className="text-sm sm:text-base text-gray-600">আপনার পছন্দের কোর্স খুঁজে নিন</p>
                         </div>
                         
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                             {/* Level Filter */}
                             <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-700">স্তর অনুযায়ী</label>
-                                <div className="flex flex-wrap gap-2">
+                                <label className="text-xs sm:text-sm font-medium text-gray-700">স্তর অনুযায়ী</label>
+                                <div className="flex flex-wrap gap-1 sm:gap-2">
                                     {levels.map((level) => (
                                         <button
                                             key={level.value}
                                             onClick={() => setSelectedLevel(level.value)}
-                                            className={`px-4 py-2 text-sm font-medium transition-colors ${
+                                            className={`px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium transition-colors ${
                                                 selectedLevel === level.value
                                                     ? 'bg-emerald-500 text-white'
                                                     : 'bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
@@ -118,13 +118,13 @@ const CoursesPage = () => {
 
                             {/* Category Filter */}
                             <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-700">ক্যাটেগরি অনুযায়ী</label>
-                                <div className="flex flex-wrap gap-2">
+                                <label className="text-xs sm:text-sm font-medium text-gray-700">ক্যাটেগরি অনুযায়ী</label>
+                                <div className="flex flex-wrap gap-1 sm:gap-2">
                                     {categories.map((category) => (
                                         <button
                                             key={category.value}
                                             onClick={() => setSelectedCategory(category.value)}
-                                            className={`px-4 py-2 text-sm font-medium transition-colors ${
+                                            className={`px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium transition-colors ${
                                                 selectedCategory === category.value
                                                     ? 'bg-green-500 text-white'
                                                     : 'bg-gray-100 text-gray-700 hover:bg-green-50 hover:text-green-700'

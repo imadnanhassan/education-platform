@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
             <div className="relative z-10 mx-auto w-full max-w-7xl p-4 pt-20 md:pt-0">
                 {/* Animated Main Title */}
                 <div className="text-center mb-8 lg:mb-12">
-                    <h1 className="opacity-0 animate-fadeInUp text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 lg:mb-6 relative">
+                    <h1 className="opacity-0 animate-fadeInUp text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6 relative">
                         <span className="bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-transparent">
                             গ্র্যাভিটন একাডেমি
                         </span>
@@ -52,8 +52,9 @@ const Hero: React.FC = () => {
                     
                     {/* Typewriter Effect Subtitle */}
                     <div className="relative inline-block">
-                        <p className="opacity-0 animate-fadeInUp animation-delay-1000 text-lg sm:text-xl lg:text-2xl text-neutral-300 font-medium overflow-hidden whitespace-nowrap border-r-2 border-emerald-400 animate-typewriter animate-blink">
-                            একাডেমিক উৎকর্ষতা থেকে বিদেশে উচ্চশিক্ষা - সব এক প্ল্যাটফর্মে
+                        <p className="opacity-0 animate-fadeInUp animation-delay-1000 text-sm sm:text-lg lg:text-xl text-neutral-300 font-medium overflow-hidden border-r-2 border-emerald-400 animate-typewriter animate-blink px-2 sm:px-0">
+                            <span className="hidden sm:inline">একাডেমিক উৎকর্ষতা থেকে বিদেশে উচ্চশিক্ষা - সব এক প্ল্যাটফর্মে</span>
+                            <span className="sm:hidden">শিক্ষার সম্পূর্ণ সমাধান</span>
                         </p>
                     </div>
                 </div>

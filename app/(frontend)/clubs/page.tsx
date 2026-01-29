@@ -87,7 +87,7 @@ const ClubsPage = () => {
                     </div>
 
                     {/* Clubs Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                         {clubs.map((club) => (
                             <Link key={club.id} href={`/clubs/${club.id}`} className="group">
                                 <div className="bg-white border border-gray-100 p-8 transition-all duration-300 hover:border-emerald-200">
@@ -198,7 +198,7 @@ const ClubsPage = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
                         {/* Benefit 1 */}
                         <div className="group relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
