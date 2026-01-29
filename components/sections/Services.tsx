@@ -93,10 +93,10 @@ const Services: React.FC = () => {
                                 )}></div>
                                 
                                 {/* Card */}
-                                <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 hover:scale-105 h-full">
+                                <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 p-8 hover:bg-white/15 transition-all duration-300 h-full">
                                     {/* Icon */}
                                     <div className={cn(
-                                        "w-16 h-16 bg-gradient-to-r rounded-2xl flex items-center justify-center mb-6 mx-auto",
+                                        "w-16 h-16 bg-gradient-to-r flex items-center justify-center mb-6 mx-auto",
                                         colors.gradient
                                     )}>
                                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,11 +130,10 @@ const Services: React.FC = () => {
                                     {/* CTA Button */}
                                     <Link href={service.link} className="block">
                                         <button className={cn(
-                                            "w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 border-2",
+                                            "w-full py-3 px-6 font-semibold transition-all duration-300 border-2",
                                             "bg-transparent hover:bg-white/10",
                                             colors.text,
-                                            colors.border,
-                                            "hover:scale-105 hover:shadow-lg"
+                                            colors.border
                                         )}>
                                             বিস্তারিত দেখুন
                                         </button>
@@ -148,7 +147,7 @@ const Services: React.FC = () => {
                 {/* Bottom CTA */}
                 <div className="text-center mt-16">
                     <Link href="/courses">
-                        <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 border-0">
+                        <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 border-0">
                             <span className="relative z-10">সকল কোর্স দেখুন</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>

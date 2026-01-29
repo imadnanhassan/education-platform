@@ -67,7 +67,7 @@ const Courses: React.FC = () => {
                             )}
 
                             {/* Card */}
-                            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full border border-gray-100">
+                            <div className="bg-white overflow-hidden border border-gray-100 h-full">
                                 {/* Course Image */}
                                 <div className="relative h-48 overflow-hidden">
                                     <img 
@@ -80,7 +80,7 @@ const Courses: React.FC = () => {
                                     {/* Level Badge */}
                                     <div className="absolute top-4 left-4">
                                         <span className={cn(
-                                            "px-3 py-1 rounded-full text-xs font-semibold text-white",
+                                            "px-3 py-1 text-xs font-semibold text-white",
                                             getLevelColor(course.level)
                                         )}>
                                             {getLevelText(course.level)}
@@ -88,7 +88,7 @@ const Courses: React.FC = () => {
                                     </div>
 
                                     {/* Rating */}
-                                    <div className="absolute top-4 right-4 flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm">
+                                    <div className="absolute top-4 right-4 flex items-center bg-white/90 backdrop-blur-sm px-2 py-1">
                                         <svg className="w-4 h-4 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                         </svg>
@@ -100,7 +100,7 @@ const Courses: React.FC = () => {
                                 <div className="p-6">
                                     {/* Category */}
                                     <div className="mb-3">
-                                        <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/30">
+                                        <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-semibold px-3 py-1 border border-emerald-400/30">
                                             {course.category}
                                         </span>
                                     </div>
@@ -138,7 +138,7 @@ const Courses: React.FC = () => {
                                             <span className="text-gray-500 text-sm ml-1">/মাস</span>
                                         </div>
                                         <Link href={`/courses/${course.id}`}>
-                                            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-md">
+                                            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-4 py-2 font-semibold transition-all duration-300">
                                                 বিস্তারিত
                                             </button>
                                         </Link>
@@ -151,17 +151,30 @@ const Courses: React.FC = () => {
 
                 {/* Bottom CTA */}
                 <div className="text-center mt-16">
-                    <Link href="/courses">
-                        <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 border-0">
-                            <span className="relative z-10 flex items-center">
-                                সকল কোর্স দেখুন
-                                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </button>
-                    </Link>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <Link href="/courses">
+                            <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 border-0">
+                                <span className="relative z-10 flex items-center">
+                                    সকল কোর্স দেখুন
+                                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+                        </Link>
+                        <Link href="/admission">
+                            <button className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 border-0">
+                                <span className="relative z-10 flex items-center">
+                                    এখনই ভর্তি হন
+                                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                </span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>

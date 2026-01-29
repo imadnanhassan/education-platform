@@ -25,6 +25,7 @@ const Navbar: React.FC = () => {
                 { name: 'Extra Curricular', href: '/fly-to-abroad/extra-curricular' }
             ]
         },
+        { name: 'ভর্তি', nameEn: 'Admission', href: '/admission' },
         { name: 'গ্যালারি', nameEn: 'Gallery', href: '/gallery' },
         { name: 'শিক্ষকবৃন্দ', nameEn: 'Teachers', href: '/teachers' },
         { name: 'বৃত্তি', nameEn: 'Scholarship', href: '/scholarship' },
@@ -55,7 +56,7 @@ const Navbar: React.FC = () => {
 
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center space-x-1">
-                        {navigation.slice(0, 6).map((item) => (
+                        {navigation.slice(0, 7).map((item) => (
                             <div key={item.href} className="relative group">
                                 <Link
                                     href={item.href}
@@ -93,7 +94,7 @@ const Navbar: React.FC = () => {
                             </button>
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                 <div className="py-1">
-                                    {navigation.slice(6).map((item) => (
+                                    {navigation.slice(7).map((item) => (
                                         <Link
                                             key={item.href}
                                             href={item.href}

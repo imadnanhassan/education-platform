@@ -39,7 +39,7 @@ const AdmissionProcess: React.FC = () => {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 mb-6">
                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
@@ -60,9 +60,9 @@ const AdmissionProcess: React.FC = () => {
                                 <div key={step.id} className="flex flex-col items-center">
                                     <div 
                                         className={cn(
-                                            "w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 cursor-pointer",
+                                            "w-10 h-10 flex items-center justify-center text-sm font-bold transition-all duration-300 cursor-pointer",
                                             index <= activeStep 
-                                                ? "bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-lg" 
+                                                ? "bg-gradient-to-r from-emerald-500 to-green-600 text-white" 
                                                 : "bg-gray-200 text-gray-500"
                                         )}
                                         onClick={() => setActiveStep(index)}
@@ -79,9 +79,9 @@ const AdmissionProcess: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="relative h-2 bg-gray-200 overflow-hidden">
                             <div 
-                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-green-600 rounded-full transition-all duration-500 ease-out"
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-green-600 transition-all duration-500 ease-out"
                                 style={{ width: `${((activeStep + 1) / admissionStepsData.length) * 100}%` }}
                             ></div>
                         </div>
@@ -96,17 +96,17 @@ const AdmissionProcess: React.FC = () => {
                             <div 
                                 key={step.id}
                                 className={cn(
-                                    "group relative p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer",
+                                    "group relative p-6 border-2 transition-all duration-300 cursor-pointer",
                                     index === activeStep 
-                                        ? "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50 shadow-lg" 
-                                        : "border-gray-200 bg-white hover:border-emerald-300 hover:shadow-md"
+                                        ? "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50" 
+                                        : "border-gray-200 bg-white hover:border-emerald-300"
                                 )}
                                 onClick={() => setActiveStep(index)}
                             >
                                 <div className="flex items-start space-x-4">
                                     {/* Step Icon */}
                                     <div className={cn(
-                                        "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300",
+                                        "w-12 h-12 flex items-center justify-center transition-all duration-300",
                                         index === activeStep 
                                             ? "bg-gradient-to-r from-emerald-500 to-green-600 text-white" 
                                             : "bg-gray-100 text-gray-600 group-hover:bg-emerald-100 group-hover:text-emerald-600"
@@ -120,7 +120,7 @@ const AdmissionProcess: React.FC = () => {
                                     <div className="flex-1">
                                         <div className="flex items-center space-x-2 mb-2">
                                             <span className={cn(
-                                                "text-sm font-bold px-2 py-1 rounded-full",
+                                                "text-sm font-bold px-2 py-1",
                                                 index === activeStep 
                                                     ? "bg-emerald-500 text-white" 
                                                     : "bg-gray-200 text-gray-600"
@@ -150,11 +150,11 @@ const AdmissionProcess: React.FC = () => {
 
                     {/* Right Side - Active Step Details */}
                     <div className="lg:sticky lg:top-8">
-                        <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+                        <div className="bg-white border border-gray-100 overflow-hidden">
                             {/* Header */}
                             <div className="bg-gradient-to-r from-emerald-500 to-green-600 p-8 text-white">
                                 <div className="flex items-center space-x-4 mb-4">
-                                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                                    <div className="w-16 h-16 bg-white/20 flex items-center justify-center">
                                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             {getIcon(admissionStepsData[activeStep].icon)}
                                         </svg>
@@ -182,8 +182,8 @@ const AdmissionProcess: React.FC = () => {
                                         </h4>
                                         <div className="space-y-3">
                                             {admissionStepsData[activeStep].requirements?.map((req, idx) => (
-                                                <div key={idx} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                                                <div key={idx} className="flex items-center space-x-3 p-3 bg-gray-50">
+                                                    <div className="w-2 h-2 bg-emerald-500"></div>
                                                     <span className="text-gray-700">{req}</span>
                                                 </div>
                                             ))}
@@ -194,7 +194,7 @@ const AdmissionProcess: React.FC = () => {
                                 {/* Action Buttons */}
                                 <div className="flex flex-col sm:flex-row gap-3">
                                     <button 
-                                        className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-emerald-500/25"
+                                        className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-3 px-6 font-semibold transition-all duration-300"
                                         onClick={() => {
                                             if (activeStep < admissionStepsData.length - 1) {
                                                 setActiveStep(activeStep + 1);
@@ -205,7 +205,7 @@ const AdmissionProcess: React.FC = () => {
                                     </button>
                                     {activeStep > 0 && (
                                         <button 
-                                            className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-semibold transition-all duration-300"
+                                            className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 font-semibold transition-all duration-300"
                                             onClick={() => setActiveStep(activeStep - 1)}
                                         >
                                             পূর্ববর্তী
@@ -217,8 +217,8 @@ const AdmissionProcess: React.FC = () => {
 
                         {/* Quick Info Cards */}
                         <div className="grid grid-cols-2 gap-4 mt-6">
-                            <div className="bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 rounded-2xl p-4 text-center">
-                                <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <div className="bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 p-4 text-center">
+                                <div className="w-8 h-8 bg-emerald-500 flex items-center justify-center mx-auto mb-2">
                                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
@@ -226,8 +226,8 @@ const AdmissionProcess: React.FC = () => {
                                 <div className="text-sm font-bold text-emerald-700">৭-১০ দিন</div>
                                 <div className="text-xs text-emerald-600">সম্পূর্ণ প্রক্রিয়া</div>
                             </div>
-                            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-4 text-center">
-                                <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 p-4 text-center">
+                                <div className="w-8 h-8 bg-green-500 flex items-center justify-center mx-auto mb-2">
                                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                     </svg>
@@ -241,7 +241,7 @@ const AdmissionProcess: React.FC = () => {
 
                 {/* Bottom CTA */}
                 <div className="text-center mt-16">
-                    <div className="bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-3xl p-8 max-w-4xl mx-auto">
+                    <div className="bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 p-8 max-w-4xl mx-auto">
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">
                             আজই শুরু করুন আপনার ভর্তি প্রক্রিয়া
                         </h3>
@@ -250,12 +250,12 @@ const AdmissionProcess: React.FC = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link href="/admission">
-                                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-emerald-500/25 transition-all duration-300">
+                                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300">
                                     এখনই আবেদন করুন
                                 </button>
                             </Link>
                             <Link href="/contact">
-                                <button className="bg-white border-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300">
+                                <button className="bg-white border-2 border-emerald-500 text-emerald-700 hover:bg-emerald-50 px-8 py-4 text-lg font-semibold transition-all duration-300">
                                     সহায়তা নিন
                                 </button>
                             </Link>

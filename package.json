@@ -12,6 +12,7 @@
         "@emotion/react": "^11.10.6",
         "@headlessui/react": "^2.1.2",
         "@heroicons/react": "^2.2.0",
+        "@hookform/resolvers": "^5.2.2",
         "@reduxjs/toolkit": "^2.2.7",
         "@tippyjs/react": "^4.2.6",
         "@types/node": "^22.4.0",
@@ -26,6 +27,7 @@
         "react": "^19.2.4",
         "react-animate-height": "^3.1.0",
         "react-dom": "^19.2.4",
+        "react-hook-form": "^7.71.1",
         "react-i18next": "^15.0.2",
         "react-perfect-scrollbar": "^1.5.8",
         "react-popper": "^2.3.0",
@@ -33,7 +35,8 @@
         "sonner": "^2.0.7",
         "typescript": "^5.3.3",
         "universal-cookie": "^7.2.0",
-        "yup": "^1.4.0"
+        "yup": "^1.4.0",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.3",

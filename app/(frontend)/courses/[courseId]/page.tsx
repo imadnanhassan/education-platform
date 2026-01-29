@@ -140,9 +140,11 @@ const CourseDetailPage = () => {
 
                                 {/* Enrollment Buttons */}
                                 <div className="space-y-3">
-                                    <button className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-4 px-8 text-lg font-semibold transition-all duration-300">
-                                        এখনই ভর্তি হন
-                                    </button>
+                                    <Link href="/admission">
+                                        <button className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-4 px-8 text-lg font-semibold transition-all duration-300">
+                                            এখনই ভর্তি হন
+                                        </button>
+                                    </Link>
                                     <button className="w-full border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400/20 py-3 px-8 font-medium transition-all duration-300">
                                         ফ্রি ট্রায়াল নিন
                                     </button>
@@ -583,9 +585,11 @@ const CourseDetailPage = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-4 text-xl font-semibold transition-all duration-300">
-                                এখনই ভর্তি হন
-                            </button>
+                            <Link href="/admission">
+                                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-4 text-xl font-semibold transition-all duration-300">
+                                    এখনই ভর্তি হন
+                                </button>
+                            </Link>
                             <Link href="/contact">
                                 <button className="border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400/20 px-10 py-4 text-xl font-semibold transition-all duration-300">
                                     যোগাযোগ করুন

@@ -74,8 +74,8 @@ const Stats: React.FC = () => {
         <section className="relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
-                <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 rounded-full filter blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-full filter blur-3xl animate-pulse animation-delay-2000"></div>
+                <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
             </div>
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
@@ -99,11 +99,11 @@ const Stats: React.FC = () => {
                             style={{ animationDelay: `${index * 100}ms` }}
                         >
                             {/* Glow Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
                             
-                            <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300">
+                            <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 p-8 hover:bg-white/15 transition-all duration-300">
                                 {/* Icon */}
-                                <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-emerald-400 to-green-500 rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300">
+                                <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-emerald-400 to-green-500 flex items-center justify-center text-white transition-all duration-300">
                                     {stat.icon}
                                 </div>
                                 
@@ -129,8 +129,8 @@ const Stats: React.FC = () => {
                 {/* Bottom Section */}
                 <div className="mt-20 text-center">
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 max-w-4xl mx-auto hover:bg-white/15 transition-all duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 p-8 max-w-4xl mx-auto hover:bg-white/15 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-4 text-white">
                                 আপনিও হতে পারেন আমাদের সফল শিক্ষার্থীদের একজন
                             </h3>
@@ -139,10 +139,10 @@ const Stats: React.FC = () => {
                                 গড়ে তুলুন আপনার উজ্জ্বল ভবিষ্যৎ।
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg">
+                                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-3 font-semibold transition-all duration-300">
                                     আজই শুরু করুন
                                 </button>
-                                <button className="border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                                <button className="border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-white px-8 py-3 font-semibold transition-all duration-300">
                                     আরও জানুন
                                 </button>
                             </div>

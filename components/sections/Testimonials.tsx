@@ -33,8 +33,8 @@ const Testimonials: React.FC = () => {
         <section className="relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
-                <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 rounded-full filter blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-full filter blur-3xl animate-pulse animation-delay-2000"></div>
+                <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-500/10 to-green-500/10 filter blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-green-400/10 to-emerald-400/10 filter blur-3xl animate-pulse animation-delay-2000"></div>
             </div>
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,19 +57,19 @@ const Testimonials: React.FC = () => {
                     onMouseLeave={() => setIsAutoPlaying(true)}
                 >
                     {/* Slider Wrapper */}
-                    <div className="overflow-hidden rounded-2xl">
+                    <div className="overflow-hidden">
                         <div 
                             className="flex transition-transform duration-700 ease-in-out"
                             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                         >
                             {testimonialsData.map((testimonial, index) => (
                                 <div key={testimonial.id} className="w-full flex-shrink-0">
-                                    <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 lg:p-12 mx-4">
+                                    <div className="backdrop-blur-xl bg-white/10 border border-white/20 p-8 lg:p-12 mx-4">
                                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                                             {/* Quote & Message */}
                                             <div className="lg:col-span-2 space-y-6">
                                                 {/* Quote Icon */}
-                                                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400/20 to-green-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-emerald-400/30">
+                                                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400/20 to-green-500/20 flex items-center justify-center backdrop-blur-sm border border-emerald-400/30">
                                                     <svg className="w-8 h-8 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
                                                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
                                                     </svg>
@@ -95,14 +95,14 @@ const Testimonials: React.FC = () => {
                                             <div className="text-center lg:text-left">
                                                 {/* Profile Image */}
                                                 <div className="relative inline-block mb-6">
-                                                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-emerald-400/50 shadow-lg">
+                                                    <div className="w-24 h-24 overflow-hidden border-4 border-emerald-400/50">
                                                         <img 
                                                             src={testimonial.image} 
                                                             alt={testimonial.name}
                                                             className="w-full h-full object-cover"
                                                         />
                                                     </div>
-                                                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 flex items-center justify-center">
                                                         <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                         </svg>
@@ -135,7 +135,7 @@ const Testimonials: React.FC = () => {
                                                         </p>
                                                     </div>
 
-                                                    <div className="inline-block bg-gradient-to-r from-emerald-500 to-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                                    <div className="inline-block bg-gradient-to-r from-emerald-500 to-green-500 text-white px-4 py-2 text-sm font-bold">
                                                         {testimonial.designation}
                                                     </div>
                                                 </div>
@@ -150,7 +150,7 @@ const Testimonials: React.FC = () => {
                     {/* Navigation Arrows */}
                     <button 
                         onClick={prevSlide}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -159,7 +159,7 @@ const Testimonials: React.FC = () => {
 
                     <button 
                         onClick={nextSlide}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -173,7 +173,7 @@ const Testimonials: React.FC = () => {
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            className={`w-3 h-3 transition-all duration-300 ${
                                 index === currentSlide 
                                     ? 'bg-emerald-400 w-8' 
                                     : 'bg-white/30 hover:bg-white/50'
@@ -187,7 +187,7 @@ const Testimonials: React.FC = () => {
                     {testimonialsData.map((testimonial, index) => (
                         <div 
                             key={testimonial.id} 
-                            className={`cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 ${
+                            className={`cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/10 border border-white/20 p-6 hover:bg-white/15 ${
                                 index === currentSlide 
                                     ? 'ring-2 ring-emerald-400 bg-white/15' 
                                     : ''
@@ -195,7 +195,7 @@ const Testimonials: React.FC = () => {
                             onClick={() => goToSlide(index)}
                         >
                             <div className="text-center">
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border-2 border-emerald-400/50">
+                                <div className="w-16 h-16 mx-auto mb-4 overflow-hidden border-2 border-emerald-400/50">
                                     <img 
                                         src={testimonial.image} 
                                         alt={testimonial.name}
@@ -208,7 +208,7 @@ const Testimonials: React.FC = () => {
                                 <p className="text-sm text-emerald-400 mb-2 font-medium">
                                     {testimonial.designation}
                                 </p>
-                                <div className="inline-block bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold border border-emerald-400/30">
+                                <div className="inline-block bg-emerald-500/20 text-emerald-400 px-3 py-1 text-xs font-bold border border-emerald-400/30">
                                     {testimonial.course}
                                 </div>
                             </div>
@@ -218,19 +218,19 @@ const Testimonials: React.FC = () => {
 
                 {/* Bottom Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6">
                         <div className="text-4xl font-bold text-emerald-400 mb-2">৯৮%</div>
                         <div className="text-gray-300 font-medium">সন্তুষ্ট শিক্ষার্থী</div>
                     </div>
-                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6">
                         <div className="text-4xl font-bold text-green-400 mb-2">৫০০+</div>
                         <div className="text-gray-300 font-medium">পজিটিভ রিভিউ</div>
                     </div>
-                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6">
                         <div className="text-4xl font-bold text-emerald-500 mb-2">৪.৯</div>
                         <div className="text-gray-300 font-medium">গড় রেটিং</div>
                     </div>
-                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6">
                         <div className="text-4xl font-bold text-green-500 mb-2">১০০%</div>
                         <div className="text-gray-300 font-medium">সাপোর্ট কোয়ালিটি</div>
                     </div>

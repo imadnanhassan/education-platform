@@ -7,8 +7,8 @@ const OnlineBatch: React.FC = () => {
         <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 lg:py-24 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
-                <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl"></div>
-                <div className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full filter blur-3xl"></div>
+                <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-purple-500/10 to-pink-500/10 filter blur-3xl"></div>
+                <div className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 filter blur-3xl"></div>
             </div>
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,14 +25,14 @@ const OnlineBatch: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {/* Live Class Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-8 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-8 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             {/* Live Icon */}
-                            <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mb-6">
+                            <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center mb-6">
                                 <div className="flex items-center space-x-1">
-                                    <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                                    <div className="w-3 h-3 bg-white rounded-full animate-pulse animation-delay-1000"></div>
-                                    <div className="w-3 h-3 bg-white rounded-full animate-pulse animation-delay-2000"></div>
+                                    <div className="w-3 h-3 bg-white animate-pulse"></div>
+                                    <div className="w-3 h-3 bg-white animate-pulse animation-delay-1000"></div>
+                                    <div className="w-3 h-3 bg-white animate-pulse animation-delay-2000"></div>
                                 </div>
                             </div>
                             
@@ -47,10 +47,10 @@ const OnlineBatch: React.FC = () => {
 
                     {/* Recorded Class Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             {/* Record Icon */}
-                            <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mb-6">
+                            <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center mb-6">
                                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                 </svg>
@@ -70,13 +70,13 @@ const OnlineBatch: React.FC = () => {
 
                     {/* MCQ Practice Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             {/* Books Icon */}
                             <div className="flex space-x-2 mb-6">
-                                <div className="w-8 h-12 bg-gradient-to-b from-pink-400 to-pink-600 rounded transform rotate-12 shadow-lg"></div>
-                                <div className="w-8 h-12 bg-gradient-to-b from-yellow-400 to-orange-500 rounded transform -rotate-6 shadow-lg"></div>
-                                <div className="w-8 h-12 bg-gradient-to-b from-green-400 to-green-600 rounded transform rotate-3 shadow-lg"></div>
+                                <div className="w-8 h-12 bg-gradient-to-b from-pink-400 to-pink-600 transform rotate-12"></div>
+                                <div className="w-8 h-12 bg-gradient-to-b from-yellow-400 to-orange-500 transform -rotate-6"></div>
+                                <div className="w-8 h-12 bg-gradient-to-b from-green-400 to-green-600 transform rotate-3"></div>
                             </div>
                             
                             <div className="text-white text-base font-semibold mb-2">
@@ -90,8 +90,8 @@ const OnlineBatch: React.FC = () => {
 
                     {/* SuperPrep Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             <div className="text-2xl font-bold mb-2">
                                 <span className="text-white">Super</span>
                                 <span className="text-blue-400">Prep</span>
@@ -110,10 +110,10 @@ const OnlineBatch: React.FC = () => {
 
                     {/* Homework Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-teal-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-teal-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             {/* Student Image Placeholder */}
-                            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center mb-4">
+                            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center mb-4">
                                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
@@ -133,8 +133,8 @@ const OnlineBatch: React.FC = () => {
 
                     {/* SuperSolve Card */}
                     <div className="group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-3xl p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
+                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 p-6 hover:bg-gray-800/90 transition-all duration-300 min-h-[280px] flex flex-col justify-center items-center text-center">
                             <div className="text-2xl font-bold mb-4">
                                 <span className="text-white">Super</span>
                                 <span className="text-red-400">Solve</span>
@@ -147,7 +147,7 @@ const OnlineBatch: React.FC = () => {
                             </p>
                             <div className="flex items-center justify-center">
                                 <span className="text-white text-sm font-semibold">TenTen</span>
-                                <div className="w-6 h-6 bg-red-500 rounded-full ml-2 flex items-center justify-center">
+                                <div className="w-6 h-6 bg-red-500 ml-2 flex items-center justify-center">
                                     <span className="text-white text-xs">→</span>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@ const OnlineBatch: React.FC = () => {
                 <div className="text-center mt-12 lg:mt-16">
                     <Link 
                         href="/courses"
-                        className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold rounded-full shadow-2xl hover:shadow-orange-500/25 transition-all duration-300"
+                        className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold transition-all duration-300"
                     >
                         <span>এখনই যোগ দিন</span>
                         <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

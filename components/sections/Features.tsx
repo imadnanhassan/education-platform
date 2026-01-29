@@ -45,9 +45,9 @@ const Features: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                     {featuresData.map((feature, index) => (
                         <div key={feature.id} className="group">
-                            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 h-full">
+                            <div className="bg-white p-8 border border-gray-100 h-full">
                                 {/* Icon */}
-                                <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                                <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mb-6">
                                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         {getIcon(feature.icon)}
                                     </svg>
@@ -77,7 +77,7 @@ const Features: React.FC = () => {
                 </div>
 
                 {/* Bottom CTA Section */}
-                <div className="bg-gradient-to-r from-emerald-600 to-green-600 rounded-2xl p-12 text-center text-white">
+                <div className="bg-gradient-to-r from-emerald-600 to-green-600 p-12 text-center text-white">
                     <h3 className="text-3xl lg:text-4xl font-bold mb-4">
                         আজই শুরু করুন আপনার শিক্ষা যাত্রা
                     </h3>
@@ -86,12 +86,12 @@ const Features: React.FC = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/login">
-                            <button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-lg shadow-md transition-colors duration-300">
+                            <button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold transition-colors duration-300">
                                 এখনই যোগ দিন
                             </button>
                         </Link>
                         <Link href="/contact">
-                            <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-600 px-8 py-4 text-lg font-semibold rounded-lg transition-colors duration-300">
+                            <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-600 px-8 py-4 text-lg font-semibold transition-colors duration-300">
                                 যোগাযোগ করুন
                             </button>
                         </Link>

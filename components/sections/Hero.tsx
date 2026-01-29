@@ -62,8 +62,8 @@ const Hero: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12 lg:mb-16">
                     {/* Made Easy System */}
                     <div className="opacity-0 animate-scaleIn animation-delay-2000 group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20  blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20  p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
                             <div className="w-12 h-12 bg-gradient-to-r from-emerald-400 to-green-500 rounded-xl flex items-center justify-center mb-4 mx-auto">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -76,8 +76,8 @@ const Hero: React.FC = () => {
 
                     {/* Fly to Abroad */}
                     <div className="opacity-0 animate-scaleIn animation-delay-2500 group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-500/20  blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20  p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
                             <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-4 mx-auto">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -90,8 +90,8 @@ const Hero: React.FC = () => {
 
                     {/* Clubs & Activities */}
                     <div className="opacity-0 animate-scaleIn animation-delay-3000 group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-400/20  blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20  p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
                             <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-400 rounded-xl flex items-center justify-center mb-4 mx-auto">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -104,8 +104,8 @@ const Hero: React.FC = () => {
 
                     {/* Scholarship */}
                     <div className="opacity-0 animate-scaleIn animation-delay-3500 group relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-400/20  blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <div className="relative backdrop-blur-xl bg-white/10 border border-white/20  p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
                             <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-400 rounded-xl flex items-center justify-center mb-4 mx-auto">
                                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -122,9 +122,23 @@ const Hero: React.FC = () => {
                     <Link href="/courses">
                         <Button 
                             size="lg" 
-                            className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 border-0"
+                            className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold shadow hover:shadow-emerald-500/25 transition-all duration-300 border-0"
                         >
                             <span className="relative z-10">কোর্স দেখুন</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </Button>
+                    </Link>
+                    <Link href="/admission">
+                        <Button 
+                            size="lg" 
+                            className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 text-lg font-semibold shadow hover:shadow-green-500/25 transition-all duration-300 border-0"
+                        >
+                            <span className="relative z-10 flex items-center">
+                                ভর্তি হন
+                                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </Button>
                     </Link>
@@ -132,7 +146,7 @@ const Hero: React.FC = () => {
                         <Button 
                             variant="outline"
                             size="lg" 
-                            className="group relative backdrop-blur-xl bg-white/10 border-2 border-emerald-400/50 text-white hover:bg-emerald-400/20 hover:border-emerald-400 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300"
+                            className="group relative backdrop-blur-xl bg-white/10 border-2 border-emerald-400/50 text-white hover:bg-emerald-400/20 hover:border-emerald-400 hover:text-emerald-600 px-8 py-4 text-lg font-semibold transition-all duration-300"
                         >
                             <span className="relative z-10">Made Easy শুরু করুন</span>
                         </Button>

@@ -59,20 +59,20 @@ const NewsUpdates: React.FC = () => {
                             index === 2 && "animation-delay-2000"
                         )}>
                             {/* News Card */}
-                            <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
+                            <div className="relative bg-white overflow-hidden border border-gray-100 h-full">
                                 {/* News Image */}
                                 <div className="relative h-48 overflow-hidden">
                                     <img 
                                         src={news.image} 
                                         alt={news.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                        className="w-full h-full object-cover transition-transform duration-300"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                     
                                     {/* Category Badge */}
                                     <div className="absolute top-4 left-4">
                                         <span className={cn(
-                                            "px-3 py-1 rounded-full text-xs font-semibold text-white",
+                                            "px-3 py-1 text-xs font-semibold text-white",
                                             getCategoryColor(news.category)
                                         )}>
                                             {getCategoryText(news.category)}
@@ -80,7 +80,7 @@ const NewsUpdates: React.FC = () => {
                                     </div>
 
                                     {/* Date */}
-                                    <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
+                                    <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1">
                                         <span className="text-gray-800 text-sm font-medium">
                                             {new Date(news.date).toLocaleDateString('bn-BD')}
                                         </span>
@@ -102,7 +102,7 @@ const NewsUpdates: React.FC = () => {
                                     {/* Author & Read More */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
-                                            <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full flex items-center justify-center mr-3">
+                                            <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mr-3">
                                                 <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                 </svg>
@@ -128,8 +128,8 @@ const NewsUpdates: React.FC = () => {
                 {/* Quick Links */}
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* Important Notice */}
-                    <div className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center">
-                        <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <div className="group relative bg-white p-6 border border-gray-100 text-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-600 flex items-center justify-center mb-4 mx-auto">
                             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z" />
                             </svg>
@@ -139,8 +139,8 @@ const NewsUpdates: React.FC = () => {
                     </div>
 
                     {/* Academic Calendar */}
-                    <div className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center">
-                        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <div className="group relative bg-white p-6 border border-gray-100 text-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mb-4 mx-auto">
                             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -150,8 +150,8 @@ const NewsUpdates: React.FC = () => {
                     </div>
 
                     {/* Results */}
-                    <div className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center">
-                        <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <div className="group relative bg-white p-6 border border-gray-100 text-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mb-4 mx-auto">
                             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                             </svg>
@@ -164,7 +164,7 @@ const NewsUpdates: React.FC = () => {
                 {/* Bottom CTA */}
                 <div className="text-center mt-16">
                     <Link href="/news">
-                        <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 border-0">
+                        <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold transition-all duration-300 border-0">
                             <span className="relative z-10 flex items-center">
                                 সকল সংবাদ দেখুন
                                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
