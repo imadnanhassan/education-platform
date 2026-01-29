@@ -5,6 +5,8 @@ import courseSlice from '@/store/slices/courseSlice';
 import clubSlice from '@/store/slices/clubSlice';
 import authSlice from '@/store/slices/authSlice';
 import dashboardSlice from '@/store/slices/dashboardSlice';
+import studentSlice from '@/store/slices/studentSlice';
+import teacherSlice from '@/store/slices/teacherSlice';
 
 const rootReducer = combineReducers({
     themeConfig: themeConfigSlice,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
     clubs: clubSlice,
     auth: authSlice,
     dashboard: dashboardSlice,
+    students: studentSlice,
+    teachers: teacherSlice,
 });
 
 export default configureStore({
@@ -20,4 +24,5 @@ export default configureStore({
 });
 
 export type IRootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = ReturnType<typeof configureStore>['dispatch'];

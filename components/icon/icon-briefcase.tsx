@@ -1,0 +1,18 @@
+import { FC } from 'react';
+
+interface IconBriefcaseProps {
+  className?: string;
+}
+
+const IconBriefcase: FC<IconBriefcaseProps> = ({ className }) => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path
+        d="M20 7H16V6C16 4.9 15.1 4 14 4H10C8.9 4 8 4.9 8 6V7H4C2.9 7 2 7.9 2 9V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V9C22 7.9 21.1 7 20 7ZM10 6H14V7H10V6ZM20 19H4V9H8V11H10V9H14V11H16V9H20V19Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
+export default IconBriefcase;

@@ -1,385 +1,1230 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Course } from '../types';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import {
+  Course,
+  CourseState,
+  CourseFilter,
+  CourseStats,
+  CourseCategory,
+  CourseActivity,
+  CourseNote,
+  BulkCourseOperation,
+  CourseImportData,
+  CourseExportOptions,
+  CourseListResponse,
+  CourseStatsResponse,
+  CourseActivityResponse,
+  CourseCategoryResponse,
+  CreateCourseFormData,
+  UpdateCourseFormData,
+  Subject,
+  Chapter,
+  CourseMaterial,
+  CoursePublishInfo,
+  CourseStatusChangeInfo,
+  CourseValidationResult,
+} from '@/store/types/course';
 
-interface CourseState {
-    courses: Course[];
-    selectedCourse: Course | null;
-    loading: boolean;
-    error: string | null;
-}
-
+// Initial state
 const initialState: CourseState = {
-    courses: [
-        {
-            id: 'hsc-complete',
-            title: 'HSC সম্পূর্ণ কোর্স',
-            titleEn: 'Complete HSC Course',
-            description: 'উচ্চ মাধ্যমিক সার্টিফিকেট পরীক্ষার জন্য সম্পূর্ণ প্রস্তুতি - সকল বিষয়ে বিশেষজ্ঞ শিক্ষকদের গাইডেন্স',
-            fullDescription: 'এই কোর্সটি HSC পরীক্ষার্থীদের জন্য বিশেষভাবে ডিজাইন করা হয়েছে। বিজ্ঞান, মানবিক এবং ব্যবসায় শিক্ষা - সকল বিভাগের শিক্ষার্থীদের জন্য আলাদা সিলেবাস রয়েছে। অভিজ্ঞ শিক্ষকমণ্ডলী, আধুনিক শিক্ষা পদ্ধতি এবং নিয়মিত মূল্যায়নের মাধ্যমে আমরা নিশ্চিত করি যে প্রতিটি শিক্ষার্থী তার সর্বোচ্চ সম্ভাবনা অর্জন করতে পারে।',
-            image: '/assets/images/hero-education.jpg',
-            price: 15000,
-            originalPrice: 20000,
-            duration: '২ বছর',
-            level: 'intermediate',
-            features: [
-                'সকল বিষয়ের লাইভ ক্লাস',
-                'MCQ ও CQ প্র্যাকটিস',
-                'PDF নোটস ও বই',
-                'ভিডিও লেকচার লাইব্রেরি',
-                'সাপ্তাহিক মডেল টেস্ট',
-                'ব্যক্তিগত মেন্টরিং',
-                'অনলাইন ও অফলাইন সাপোর্ট'
-            ],
-            curriculum: [
-                'পদার্থবিজ্ঞান - ১ম ও ২য় পত্র',
-                'রসায়ন - ১ম ও ২য় পত্র', 
-                'গণিত - ১ম ও ২য় পত্র',
-                'জীববিজ্ঞান - ১ম ও ২য় পত্র',
-                'বাংলা - ১ম ও ২য় পত্র',
-                'ইংরেজি - ১ম ও ২য় পত্র',
-                'ICT ও অন্যান্য বিষয়'
-            ],
-            instructor: 'প্রফেসর ড. আহমেদ আলী',
-            instructorImage: '/assets/images/profile-34.jpeg',
-            instructorBio: '২০ বছরের শিক্ষকতার অভিজ্ঞতা সহ পদার্থবিজ্ঞানের প্রফেসর। ঢাকা বিশ্ববিদ্যালয় থেকে পিএইচডি।',
-            totalStudents: 1250,
-            rating: 4.9,
-            totalLessons: 240,
-            totalHours: 480,
-            certificate: true,
-            isPopular: true,
-            category: 'HSC',
-            prerequisites: ['SSC পাস বা সমমান'],
-            whatYouWillLearn: [
-                'HSC সিলেবাসের সম্পূর্ণ কভারেজ',
-                'পরীক্ষার কৌশল ও টাইম ম্যানেজমেন্ট',
-                'MCQ ও CQ সমাধানের দক্ষতা',
-                'বিষয়ভিত্তিক গভীর জ্ঞান',
-                'পরীক্ষার আত্মবিশ্বাস বৃদ্ধি'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'ielts-preparation',
-            title: 'IELTS প্রস্তুতি কোর্স',
-            titleEn: 'IELTS Preparation Course',
-            description: 'আন্তর্জাতিক মানের IELTS প্রস্তুতি - Listening, Reading, Writing, Speaking সকল মডিউলে দক্ষতা অর্জন',
-            fullDescription: 'IELTS (International English Language Testing System) পরীক্ষায় সফলতার জন্য আমাদের বিশেষায়িত কোর্স। ব্রিটিশ কাউন্সিল ট্রেইনড শিক্ষকদের তত্ত্বাবধানে চার মডিউলে (Listening, Reading, Writing, Speaking) সম্পূর্ণ প্রস্তুতি। নিয়মিত মক টেস্ট, ব্যক্তিগত ফিডব্যাক এবং ব্যান্ড স্কোর উন্নতির গ্যারান্টি।',
-            image: '/assets/images/hero-education.jpg',
-            price: 12000,
-            originalPrice: 15000,
-            duration: '৬ মাস',
-            level: 'intermediate',
-            features: [
-                'Listening Practice Sessions',
-                'Reading Comprehension',
-                'Writing Task 1 & 2',
-                'Speaking Mock Tests',
-                'Weekly Mock Exams',
-                'Individual Feedback',
-                'Study Materials Included'
-            ],
-            curriculum: [
-                'IELTS Overview & Test Format',
-                'Listening Module Training',
-                'Reading Module Strategies',
-                'Writing Task 1 (Academic/General)',
-                'Writing Task 2 (Essay Writing)',
-                'Speaking Module Practice',
-                'Mock Tests & Evaluation'
-            ],
-            instructor: 'ড. সালমা বেগম',
-            instructorImage: '/assets/images/user-profile.jpeg',
-            instructorBio: 'IELTS Certified Trainer, Cambridge University থেকে TESOL সার্টিফিকেট। ১৫ বছরের অভিজ্ঞতা।',
-            totalStudents: 850,
-            rating: 4.8,
-            totalLessons: 96,
-            totalHours: 144,
-            certificate: true,
-            isPopular: true,
-            category: 'Language',
-            prerequisites: ['ইংরেজিতে মৌলিক দক্ষতা'],
-            whatYouWillLearn: [
-                'IELTS পরীক্ষার সম্পূর্ণ ফরম্যাট',
-                'Listening দক্ষতা উন্নয়ন',
-                'Reading speed ও comprehension',
-                'Academic ও General Writing',
-                'Fluent Speaking techniques',
-                'Band Score 7+ অর্জনের কৌশল'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'sat-preparation',
-            title: 'SAT প্রস্তুতি কোর্স',
-            titleEn: 'SAT Preparation Course',
-            description: 'আমেরিকান বিশ্ববিদ্যালয়ে ভর্তির জন্য SAT পরীক্ষার সম্পূর্ণ প্রস্তুতি - Math ও English উভয় সেকশনে',
-            fullDescription: 'SAT (Scholastic Assessment Test) আমেরিকান বিশ্ববিদ্যালয়ে ভর্তির জন্য অত্যাবশ্যক। আমাদের কোর্সে রয়েছে Math ও Evidence-Based Reading and Writing উভয় সেকশনের বিস্তারিত প্রস্তুতি। College Board অনুমোদিত সিলেবাস অনুসরণ করে আমরা শিক্ষার্থীদের 1400+ স্কোর অর্জনে সহায়তা করি।',
-            image: '/assets/images/hero-education.jpg',
-            price: 18000,
-            originalPrice: 22000,
-            duration: '৮ মাস',
-            level: 'advanced',
-            features: [
-                'Math Section (Algebra, Geometry)',
-                'Reading & Writing Section',
-                'Practice Tests (Official)',
-                'Vocabulary Building',
-                'Test-taking Strategies',
-                'College Application Guidance',
-                'Scholarship Information'
-            ],
-            curriculum: [
-                'SAT Math - Algebra & Functions',
-                'SAT Math - Geometry & Trigonometry',
-                'SAT Math - Statistics & Probability',
-                'Reading Comprehension Strategies',
-                'Grammar & Language Usage',
-                'Essay Writing (Optional)',
-                'Full-length Practice Tests'
-            ],
-            instructor: 'মোহাম্মদ করিম',
-            instructorImage: '/assets/images/profile-16.jpeg',
-            instructorBio: 'MIT গ্র্যাজুয়েট, SAT Math Perfect Scorer। ১২ বছর SAT কোচিং অভিজ্ঞতা।',
-            totalStudents: 420,
-            rating: 4.9,
-            totalLessons: 128,
-            totalHours: 192,
-            certificate: true,
-            isPopular: false,
-            category: 'International',
-            prerequisites: ['HSC বা A-Level সমমান', 'ইংরেজিতে ভাল দক্ষতা'],
-            whatYouWillLearn: [
-                'SAT Math সম্পূর্ণ সিলেবাস',
-                'Critical Reading Skills',
-                'Advanced Grammar Rules',
-                'Time Management Techniques',
-                'Test Anxiety Management',
-                '1400+ Score Achievement Strategy'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'olympiad-preparation',
-            title: 'অলিম্পিয়াড প্রস্তুতি',
-            titleEn: 'Olympiad Preparation',
-            description: 'গণিত, পদার্থ ও রসায়ন অলিম্পিয়াডের জন্য বিশেষ প্রস্তুতি - জাতীয় ও আন্তর্জাতিক পর্যায়ে সফলতার জন্য',
-            fullDescription: 'বাংলাদেশ গণিত অলিম্পিয়াড, পদার্থবিজ্ঞান অলিম্পিয়াড এবং রসায়ন অলিম্পিয়াডের জন্য বিশেষায়িত প্রস্তুতি কোর্স। আন্তর্জাতিক অলিম্পিয়াড মেডেলিস্ট শিক্ষকদের তত্ত্বাবধানে সমস্যা সমাধানের উন্নত কৌশল শেখানো হয়। জাতীয় পর্যায়ে পদক জয়ের লক্ষ্যে নিবিড় প্রশিক্ষণ।',
-            image: '/assets/images/hero-education.jpg',
-            price: 14000,
-            originalPrice: 18000,
-            duration: '১ বছর',
-            level: 'advanced',
-            features: [
-                'Math Olympiad Training',
-                'Physics Olympiad Prep',
-                'Chemistry Olympiad Prep',
-                'Problem Solving Techniques',
-                'Competition Strategies',
-                'Mock Competitions',
-                'Individual Mentoring'
-            ],
-            curriculum: [
-                'Number Theory & Algebra',
-                'Geometry & Combinatorics',
-                'Classical Mechanics Problems',
-                'Thermodynamics & Waves',
-                'Organic Chemistry Reactions',
-                'Physical Chemistry Calculations',
-                'Competition Problem Solving'
-            ],
-            instructor: 'ড. রাহুল দাস',
-            instructorImage: '/assets/images/profile-34.jpeg',
-            instructorBio: 'আন্তর্জাতিক গণিত অলিম্পিয়াড ব্রোঞ্জ মেডেলিস্ট। IIT থেকে পিএইচডি।',
-            totalStudents: 180,
-            rating: 4.9,
-            totalLessons: 160,
-            totalHours: 240,
-            certificate: true,
-            isPopular: false,
-            category: 'Competition',
-            prerequisites: ['HSC বিজ্ঞান বিভাগ', 'গণিত ও বিজ্ঞানে ভাল ফলাফল'],
-            whatYouWillLearn: [
-                'Advanced Problem Solving',
-                'Mathematical Proof Techniques',
-                'Physics Problem Analysis',
-                'Chemistry Reaction Mechanisms',
-                'Competition Time Management',
-                'Medal Winning Strategies'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'ssc-complete',
-            title: 'SSC সম্পূর্ণ কোর্স',
-            titleEn: 'Complete SSC Course',
-            description: 'মাধ্যমিক স্কুল সার্টিফিকেট পরীক্ষার জন্য সম্পূর্ণ প্রস্তুতি - সকল বিষয়ে A+ গ্রেড অর্জনের লক্ষ্যে',
-            fullDescription: 'SSC পরীক্ষার্থীদের জন্য বিশেষভাবে প্রস্তুত এই কোর্সে রয়েছে সকল বিষয়ের সম্পূর্ণ সিলেবাস কভারেজ। বিজ্ঞান, মানবিক এবং ব্যবসায় শিক্ষা বিভাগের জন্য আলাদা ব্যাচ। নিয়মিত ক্লাস টেস্ট, মডেল টেস্ট এবং ব্যক্তিগত যত্নের মাধ্যমে প্রতিটি শিক্ষার্থীর সর্বোচ্চ ফলাফল নিশ্চিত করা হয়।',
-            image: '/assets/images/hero-education.jpg',
-            price: 10000,
-            originalPrice: 13000,
-            duration: '১ বছর',
-            level: 'beginner',
-            features: [
-                'সকল বিষয়ের ক্লাস',
-                'নিয়মিত ক্লাস টেস্ট',
-                'মাসিক মডেল টেস্ট',
-                'প্রশ্ন সমাধান সেশন',
-                'অভিভাবক মিটিং',
-                'স্টাডি ম্যাটেরিয়াল',
-                'অনলাইন সাপোর্ট'
-            ],
-            curriculum: [
-                'বাংলা ১ম ও ২য় পত্র',
-                'ইংরেজি ১ম ও ২য় পত্র',
-                'গণিত',
-                'বিজ্ঞান (পদার্থ, রসায়ন, জীববিজ্ঞান)',
-                'বাংলাদেশ ও বিশ্বপরিচয়',
-                'ধর্ম ও নৈতিক শিক্ষা',
-                'তথ্য ও যোগাযোগ প্রযুক্তি'
-            ],
-            instructor: 'মিসেস ফাতিমা খাতুন',
-            instructorImage: '/assets/images/user-profile.jpeg',
-            instructorBio: 'SSC বিশেষজ্ঞ শিক্ষক। ঢাকা বিশ্ববিদ্যালয় থেকে শিক্ষায় মাস্টার্স। ১৮ বছরের অভিজ্ঞতা।',
-            totalStudents: 950,
-            rating: 4.7,
-            totalLessons: 180,
-            totalHours: 270,
-            certificate: true,
-            isPopular: true,
-            category: 'SSC',
-            prerequisites: ['ক্লাস ৯ সম্পন্ন'],
-            whatYouWillLearn: [
-                'SSC সিলেবাসের সম্পূর্ণ কভারেজ',
-                'পরীক্ষার প্রশ্ন প্যাটার্ন',
-                'সময় ব্যবস্থাপনা',
-                'সৃজনশীল প্রশ্ন সমাধান',
-                'MCQ কৌশল',
-                'A+ গ্রেড অর্জনের পদ্ধতি'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'spoken-english',
-            title: 'স্পোকেন ইংলিশ কোর্স',
-            titleEn: 'Spoken English Course',
-            description: 'দৈনন্দিন কথোপকথনে ইংরেজি ভাষায় দক্ষতা অর্জন - Beginner থেকে Advanced লেভেল পর্যন্ত',
-            fullDescription: 'আত্মবিশ্বাসের সাথে ইংরেজিতে কথা বলার জন্য আমাদের বিশেষায়িত কোর্স। দৈনন্দিন কথোপকথন, ব্যবসায়িক যোগাযোগ, প্রেজেন্টেশন স্কিল এবং উচ্চারণ উন্নতির উপর বিশেষ গুরুত্ব। ইন্টারেক্টিভ ক্লাস, গ্রুপ ডিসকাশন এবং রিয়েল-লাইফ সিচুয়েশন প্র্যাকটিসের মাধ্যমে ভাষার দক্ষতা বৃদ্ধি।',
-            image: '/assets/images/hero-education.jpg',
-            price: 6000,
-            originalPrice: 8000,
-            duration: '৪ মাস',
-            level: 'beginner',
-            features: [
-                'Interactive Speaking Sessions',
-                'Pronunciation Training',
-                'Grammar in Context',
-                'Vocabulary Building',
-                'Group Discussions',
-                'Presentation Skills',
-                'Confidence Building'
-            ],
-            curriculum: [
-                'Basic Conversation Skills',
-                'Pronunciation & Accent Training',
-                'Grammar for Speaking',
-                'Vocabulary Enhancement',
-                'Business English',
-                'Presentation Techniques',
-                'Advanced Conversation'
-            ],
-            instructor: 'জনাব আরিফ হাসান',
-            instructorImage: '/assets/images/profile-16.jpeg',
-            instructorBio: 'TESOL Certified English Trainer। যুক্তরাজ্যে ৫ বছর অভিজ্ঞতা। ১০ বছর বাংলাদেশে শিক্ষকতা।',
-            totalStudents: 650,
-            rating: 4.6,
-            totalLessons: 64,
-            totalHours: 96,
-            certificate: true,
-            isPopular: false,
-            category: 'Language',
-            prerequisites: ['ইংরেজি পড়তে পারার ক্ষমতা'],
-            whatYouWillLearn: [
-                'Fluent English Speaking',
-                'Correct Pronunciation',
-                'Everyday Conversation',
-                'Business Communication',
-                'Public Speaking Skills',
-                'Confidence in English'
-            ],
-            createdAt: '2024-01-01'
-        },
-        {
-            id: 'computer-basics',
-            title: 'কম্পিউটার বেসিক কোর্স',
-            titleEn: 'Computer Basics Course',
-            description: 'কম্পিউটারের মৌলিক জ্ঞান থেকে শুরু করে MS Office, ইন্টারনেট ব্যবহার এবং ডিজিটাল লিটারেসি',
-            fullDescription: 'ডিজিটাল যুগে কম্পিউটার দক্ষতা অপরিহার্য। আমাদের এই কোর্সে রয়েছে কম্পিউটারের মৌলিক জ্ঞান, Windows অপারেটিং সিস্টেম, MS Word, Excel, PowerPoint, ইন্টারনেট ব্রাউজিং, ইমেইল ব্যবহার এবং সাইবার নিরাপত্তার বিষয়াদি। চাকরি ও ব্যবসায়িক প্রয়োজনে কম্পিউটার ব্যবহারের সম্পূর্ণ দক্ষতা অর্জন।',
-            image: '/assets/images/hero-education.jpg',
-            price: 5000,
-            originalPrice: 7000,
-            duration: '৩ মাস',
-            level: 'beginner',
-            features: [
-                'Computer Fundamentals',
-                'Windows Operating System',
-                'MS Office Suite',
-                'Internet & Email',
-                'Digital Security',
-                'Hands-on Practice',
-                'Job-ready Skills'
-            ],
-            curriculum: [
-                'Computer Hardware & Software',
-                'Windows OS Navigation',
-                'MS Word (Document Creation)',
-                'MS Excel (Spreadsheets)',
-                'MS PowerPoint (Presentations)',
-                'Internet Browsing & Email',
-                'Digital Security & Privacy'
-            ],
-            instructor: 'ইঞ্জিনিয়ার সাকিব রহমান',
-            instructorImage: '/assets/images/profile-34.jpeg',
-            instructorBio: 'Computer Science Engineer। Microsoft Certified Trainer। ১৫ বছর IT ট্রেনিং অভিজ্ঞতা।',
-            totalStudents: 1100,
-            rating: 4.5,
-            totalLessons: 48,
-            totalHours: 72,
-            certificate: true,
-            isPopular: true,
-            category: 'Technology',
-            prerequisites: ['কোন পূর্ব অভিজ্ঞতার প্রয়োজন নেই'],
-            whatYouWillLearn: [
-                'Computer Operation Skills',
-                'MS Office Proficiency',
-                'Internet Usage',
-                'Email Communication',
-                'Digital File Management',
-                'Basic Troubleshooting'
-            ],
-            createdAt: '2024-01-01'
-        }
-    ],
-    selectedCourse: null,
-    loading: false,
-    error: null
+  courses: [],
+  currentCourse: null,
+  categories: [],
+  stats: null,
+  activities: [],
+  notes: [],
+  filters: {
+    search: '',
+    status: 'all',
+    category: '',
+    level: 'all',
+    instructor: '',
+    sortBy: 'createdAt',
+    sortOrder: 'desc',
+    page: 1,
+    limit: 20,
+  },
+  pagination: {
+    page: 1,
+    limit: 20,
+    total: 0,
+    totalPages: 0,
+  },
+  loading: {
+    list: false,
+    details: false,
+    create: false,
+    update: false,
+    delete: false,
+    publish: false,
+    validate: false,
+    statusChange: false,
+    stats: false,
+    export: false,
+    import: false,
+    categories: false,
+  },
+  error: {
+    list: null,
+    details: null,
+    create: null,
+    update: null,
+    delete: null,
+    publish: null,
+    validate: null,
+    statusChange: null,
+    stats: null,
+    export: null,
+    import: null,
+    categories: null,
+  },
+  selectedCourses: [],
+  searchResults: [],
+  recentlyViewed: [],
+  publishQueue: [],
+  validationResults: {},
+  importProgress: {
+    total: 0,
+    processed: 0,
+    errors: [],
+    isImporting: false,
+  },
 };
 
-const courseSlice = createSlice({
-    name: 'courses',
-    initialState,
-    reducers: {
-        setSelectedCourse: (state, action: PayloadAction<Course | null>) => {
-            state.selectedCourse = action.payload;
-        },
-        setLoading: (state, action: PayloadAction<boolean>) => {
-            state.loading = action.payload;
-        },
-        setError: (state, action: PayloadAction<string | null>) => {
-            state.error = action.payload;
-        }
+// Dummy data generators
+const generateDummyCategories = (): CourseCategory[] => {
+  return [
+    {
+      id: 'cat-1',
+      name: 'বিজ্ঞান',
+      nameEn: 'Science',
+      description: 'পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান এবং গণিত',
+      icon: '🔬',
+      color: '#10b981',
+      isActive: true,
+      courseCount: 15,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: 'cat-2',
+      name: 'ভাষা ও সাহিত্য',
+      nameEn: 'Language & Literature',
+      description: 'বাংলা, ইংরেজি এবং অন্যান্য ভাষা',
+      icon: '📚',
+      color: '#3b82f6',
+      isActive: true,
+      courseCount: 12,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: 'cat-3',
+      name: 'তথ্য ও যোগাযোগ প্রযুক্তি',
+      nameEn: 'ICT',
+      description: 'কম্পিউটার বিজ্ঞান এবং প্রোগ্রামিং',
+      icon: '💻',
+      color: '#8b5cf6',
+      isActive: true,
+      courseCount: 8,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: 'cat-4',
+      name: 'ব্যবসায় শিক্ষা',
+      nameEn: 'Business Studies',
+      description: 'হিসাববিজ্ঞান, ব্যবসায় নীতি ও প্রয়োগ',
+      icon: '💼',
+      color: '#f59e0b',
+      isActive: true,
+      courseCount: 6,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: 'cat-5',
+      name: 'সামাজিক বিজ্ঞান',
+      nameEn: 'Social Science',
+      description: 'ইতিহাস, ভূগোল, পৌরনীতি ও সুশাসন',
+      icon: '🌍',
+      color: '#ef4444',
+      isActive: true,
+      courseCount: 10,
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
+  ];
+};
+
+const generateDummyMaterials = (count: number = 3): CourseMaterial[] => {
+  const materialTypes: CourseMaterial['type'][] = ['video', 'pdf', 'mcq', 'assignment', 'text'];
+  const materials: CourseMaterial[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const type = materialTypes[i % materialTypes.length];
+    materials.push({
+      id: `material-${Date.now()}-${i}`,
+      title: `উপাদান ${i + 1}`,
+      type,
+      content: type === 'video' ? 'https://example.com/video.mp4' : 
+               type === 'pdf' ? 'https://example.com/document.pdf' : 
+               'Sample content',
+      duration: type === 'video' ? Math.floor(Math.random() * 60) + 10 : undefined,
+      order: i + 1,
+      isRequired: i < 2, // First 2 materials are required
+      description: `এটি ${i + 1} নম্বর উপাদানের বিবরণ`,
+      fileSize: type === 'pdf' ? Math.floor(Math.random() * 5000000) + 1000000 : undefined,
+      mimeType: type === 'video' ? 'video/mp4' : type === 'pdf' ? 'application/pdf' : 'text/plain',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
+  return materials;
+};
+
+const generateDummyChapters = (count: number = 3): Chapter[] => {
+  const chapters: Chapter[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const materials = generateDummyMaterials(Math.floor(Math.random() * 5) + 2);
+    chapters.push({
+      id: `chapter-${Date.now()}-${i}`,
+      title: `অধ্যায় ${i + 1}`,
+      titleEn: `Chapter ${i + 1}`,
+      description: `এটি ${i + 1} নম্বর অধ্যায়ের বিবরণ। এই অধ্যায়ে গুরুত্বপূর্ণ বিষয়গুলো আলোচনা করা হয়েছে।`,
+      order: i + 1,
+      materials,
+      estimatedDuration: materials.reduce((total, material) => total + (material.duration || 0), 0),
+      completionRate: Math.floor(Math.random() * 40) + 60, // 60-100%
+      isPublished: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
+  return chapters;
+};
+
+const generateDummySubjects = (count: number = 2): Subject[] => {
+  const subjects: Subject[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const chapters = generateDummyChapters(Math.floor(Math.random() * 4) + 2);
+    subjects.push({
+      id: `subject-${Date.now()}-${i}`,
+      title: `বিষয় ${i + 1}`,
+      titleEn: `Subject ${i + 1}`,
+      description: `এটি ${i + 1} নম্বর বিষয়ের বিবরণ। এই বিষয়ে বিস্তারিত আলোচনা করা হয়েছে।`,
+      order: i + 1,
+      chapters,
+      estimatedDuration: chapters.reduce((total, chapter) => total + chapter.estimatedDuration, 0),
+      completionRate: Math.floor(Math.random() * 30) + 70, // 70-100%
+      isPublished: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
+  return subjects;
+};
+
+const generateDummyCourses = (): Course[] => {
+  const categories = generateDummyCategories();
+  const courseNames = [
+    { bn: 'উচ্চ মাধ্যমিক পদার্থবিজ্ঞান', en: 'Higher Secondary Physics' },
+    { bn: 'উচ্চ মাধ্যমিক রসায়ন', en: 'Higher Secondary Chemistry' },
+    { bn: 'উচ্চ মাধ্যমিক গণিত', en: 'Higher Secondary Mathematics' },
+    { bn: 'উচ্চ মাধ্যমিক জীববিজ্ঞান', en: 'Higher Secondary Biology' },
+    { bn: 'ইংরেজি ভাষা ও সাহিত্য', en: 'English Language & Literature' },
+    { bn: 'বাংলা ভাষা ও সাহিত্য', en: 'Bengali Language & Literature' },
+    { bn: 'তথ্য ও যোগাযোগ প্রযুক্তি', en: 'Information & Communication Technology' },
+    { bn: 'ব্যবসায় নীতি ও প্রয়োগ', en: 'Business Studies & Application' },
+    { bn: 'হিসাববিজ্ঞান', en: 'Accounting' },
+    { bn: 'বাংলাদেশ ও বিশ্বপরিচয়', en: 'Bangladesh & Global Studies' },
+    { bn: 'ইসলামের ইতিহাস ও সংস্কৃতি', en: 'History & Culture of Islam' },
+    { bn: 'পৌরনীতি ও সুশাসন', en: 'Civics & Good Governance' },
+  ];
+
+  const instructorNames = [
+    'ড. মোহাম্মদ করিম',
+    'প্রফেসর ফাতিমা খান',
+    'ড. আব্দুর রহমান',
+    'প্রফেসর সাদিয়া ইসলাম',
+    'ড. তানভীর হাসান',
+    'প্রফেসর নুসরাত জাহান',
+  ];
+
+  const levels: Course['level'][] = ['beginner', 'intermediate', 'advanced'];
+  const statuses: Course['status'][] = ['draft', 'published', 'archived', 'under_review'];
+
+  return courseNames.map((course, index) => {
+    const category = categories[index % categories.length];
+    const instructor = instructorNames[index % instructorNames.length];
+    const level = levels[index % levels.length];
+    const status = index % 5 === 0 ? 'draft' : index % 7 === 0 ? 'under_review' : index % 10 === 0 ? 'archived' : 'published';
+    const subjects = generateDummySubjects(Math.floor(Math.random() * 3) + 2);
+    const totalDuration = subjects.reduce((total, subject) => total + subject.estimatedDuration, 0);
+
+    return {
+      id: `course-${index + 1}`,
+      title: course.bn,
+      titleEn: course.en,
+      description: `${course.bn} কোর্সটি ${level === 'beginner' ? 'প্রাথমিক' : level === 'intermediate' ? 'মধ্যম' : 'উন্নত'} স্তরের শিক্ষার্থীদের জন্য ডিজাইন করা হয়েছে। এই কোর্সে বিস্তারিত আলোচনা এবং ব্যবহারিক প্রয়োগ রয়েছে।`,
+      shortDescription: `${course.bn} এর সম্পূর্ণ কোর্স`,
+      category: category.id,
+      categoryInfo: category,
+      level,
+      duration: Math.floor(totalDuration / 60), // Convert minutes to hours
+      price: Math.floor(Math.random() * 5000) + 1000, // 1000-6000 BDT
+      originalPrice: Math.floor(Math.random() * 2000) + 6000, // For showing discounts
+      currency: 'BDT' as const,
+      thumbnail: `https://ui-avatars.com/api/?name=${encodeURIComponent(course.en)}&background=10b981&color=fff&size=400`,
+      bannerImage: `https://picsum.photos/800/400?random=${index}`,
+      videoPreview: `https://example.com/preview-${index + 1}.mp4`,
+      status,
+      instructor: `instructor-${(index % instructorNames.length) + 1}`,
+      instructorInfo: {
+        id: `instructor-${(index % instructorNames.length) + 1}`,
+        name: instructor,
+        email: `${instructor.toLowerCase().replace(/[^\w]/g, '')}@graviton.edu.bd`,
+        avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(instructor)}&background=3b82f6&color=fff`,
+        bio: `${instructor} একজন অভিজ্ঞ শিক্ষক এবং গবেষক।`,
+        specializations: [course.bn],
+        rating: Math.random() * 2 + 3, // 3-5 rating
+        totalCourses: Math.floor(Math.random() * 10) + 1,
+        totalStudents: Math.floor(Math.random() * 1000) + 100,
+      },
+      subjects,
+      tags: [
+        course.bn.split(' ')[0],
+        level === 'beginner' ? 'প্রাথমিক' : level === 'intermediate' ? 'মধ্যম' : 'উন্নত',
+        category.name,
+      ],
+      prerequisites: index % 3 === 0 ? 'মাধ্যমিক স্তরের জ্ঞান প্রয়োজন' : undefined,
+      learningOutcomes: [
+        `${course.bn} এর মূল ধারণা বুঝতে পারবেন`,
+        'ব্যবহারিক সমস্যা সমাধান করতে পারবেন',
+        'পরীক্ষায় ভাল ফলাফল অর্জন করতে পারবেন',
+      ],
+      targetAudience: ['HSC শিক্ষার্থী', 'বিশ্ববিদ্যালয় ভর্তিচ্ছু', 'শিক্ষক'],
+      
+      // Enrollment settings
+      isPublic: true,
+      allowEnrollment: status === 'published',
+      maxStudents: Math.floor(Math.random() * 500) + 100,
+      enrollmentStartDate: '2024-01-01T00:00:00Z',
+      enrollmentEndDate: '2024-12-31T23:59:59Z',
+      
+      // Course statistics
+      totalStudents: Math.floor(Math.random() * 200) + 50,
+      rating: Math.random() * 2 + 3, // 3-5 rating
+      totalRatings: Math.floor(Math.random() * 100) + 20,
+      enrollmentInfo: {
+        totalEnrollments: Math.floor(Math.random() * 200) + 50,
+        activeEnrollments: Math.floor(Math.random() * 150) + 30,
+        completedEnrollments: Math.floor(Math.random() * 50) + 10,
+        droppedEnrollments: Math.floor(Math.random() * 20) + 5,
+        averageProgress: Math.floor(Math.random() * 40) + 60, // 60-100%
+        averageRating: Math.random() * 2 + 3,
+        totalRatings: Math.floor(Math.random() * 100) + 20,
+      },
+      
+      // Publishing information
+      publishedAt: status === 'published' ? new Date().toISOString() : undefined,
+      publishedBy: status === 'published' ? 'admin-1' : undefined,
+      lastModifiedBy: 'admin-1',
+      version: 1,
+      
+      // SEO and metadata
+      slug: course.en.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-'),
+      metaTitle: `${course.bn} - Graviton Academy`,
+      metaDescription: `${course.bn} কোর্সে ভর্তি হয়ে আপনার দক্ষতা বৃদ্ধি করুন।`,
+      keywords: [course.bn, course.en, category.name, 'অনলাইন কোর্স'],
+      
+      // Course settings
+      allowComments: true,
+      allowRating: true,
+      certificateTemplate: 'default-template',
+      passingScore: 70, // 70% to pass
+      
+      // Timestamps
+      createdAt: `2024-0${Math.floor(Math.random() * 9) + 1}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}T10:00:00Z`,
+      updatedAt: new Date().toISOString(),
+    };
+  });
+};
+
+// Async thunks for API calls
+export const fetchCourses = createAsyncThunk(
+  'courses/fetchCourses',
+  async (filters: CourseFilter = {}) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const dummyCourses = generateDummyCourses();
+    let filteredCourses = [...dummyCourses];
+
+    // Apply filters
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase();
+      filteredCourses = filteredCourses.filter(course =>
+        course.title.toLowerCase().includes(searchTerm) ||
+        course.titleEn.toLowerCase().includes(searchTerm) ||
+        course.description.toLowerCase().includes(searchTerm) ||
+        course.instructorInfo?.name.toLowerCase().includes(searchTerm)
+      );
     }
+
+    if (filters.status && filters.status !== 'all') {
+      filteredCourses = filteredCourses.filter(course => course.status === filters.status);
+    }
+
+    if (filters.category) {
+      filteredCourses = filteredCourses.filter(course => course.category === filters.category);
+    }
+
+    if (filters.level && filters.level !== 'all') {
+      filteredCourses = filteredCourses.filter(course => course.level === filters.level);
+    }
+
+    if (filters.instructor) {
+      filteredCourses = filteredCourses.filter(course => course.instructor === filters.instructor);
+    }
+
+    if (filters.priceMin !== undefined) {
+      filteredCourses = filteredCourses.filter(course => course.price >= filters.priceMin!);
+    }
+
+    if (filters.priceMax !== undefined) {
+      filteredCourses = filteredCourses.filter(course => course.price <= filters.priceMax!);
+    }
+
+    // Apply sorting
+    if (filters.sortBy) {
+      filteredCourses.sort((a, b) => {
+        let aValue: any, bValue: any;
+        
+        switch (filters.sortBy) {
+          case 'title':
+            aValue = a.title;
+            bValue = b.title;
+            break;
+          case 'price':
+            aValue = a.price;
+            bValue = b.price;
+            break;
+          case 'duration':
+            aValue = a.duration;
+            bValue = b.duration;
+            break;
+          case 'totalStudents':
+            aValue = a.totalStudents;
+            bValue = b.totalStudents;
+            break;
+          case 'rating':
+            aValue = a.rating;
+            bValue = b.rating;
+            break;
+          case 'publishedAt':
+            aValue = new Date(a.publishedAt || a.createdAt);
+            bValue = new Date(b.publishedAt || b.createdAt);
+            break;
+          case 'createdAt':
+          default:
+            aValue = new Date(a.createdAt);
+            bValue = new Date(b.createdAt);
+        }
+
+        if (aValue < bValue) return filters.sortOrder === 'asc' ? -1 : 1;
+        if (aValue > bValue) return filters.sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    // Apply pagination
+    const page = filters.page || 1;
+    const limit = filters.limit || 20;
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
+
+    const response: CourseListResponse = {
+      courses: paginatedCourses,
+      pagination: {
+        page,
+        limit,
+        total: filteredCourses.length,
+        totalPages: Math.ceil(filteredCourses.length / limit),
+      },
+    };
+
+    return response;
+  }
+);
+
+export const fetchCourseById = createAsyncThunk(
+  'courses/fetchCourseById',
+  async (courseId: string) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    const dummyCourses = generateDummyCourses();
+    const course = dummyCourses.find(c => c.id === courseId);
+    
+    if (!course) {
+      throw new Error('Course not found');
+    }
+    
+    return course;
+  }
+);
+
+export const fetchCourseCategories = createAsyncThunk(
+  'courses/fetchCourseCategories',
+  async () => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 300));
+    
+    const categories = generateDummyCategories();
+    
+    const response: CourseCategoryResponse = {
+      categories,
+    };
+    
+    return response;
+  }
+);
+
+export const createCourse = createAsyncThunk(
+  'courses/createCourse',
+  async (courseData: CreateCourseFormData) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Transform the form data to a complete Course object
+    const subjects: Subject[] = courseData.subjects.map((subject, index) => ({
+      ...subject,
+      id: `subject-${Date.now()}-${index}`,
+      estimatedDuration: subject.chapters.reduce((total, chapter) => 
+        total + chapter.materials.reduce((chapterTotal, material) => 
+          chapterTotal + (material.duration || 0), 0), 0),
+      isPublished: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      chapters: subject.chapters.map((chapter, chapterIndex) => ({
+        ...chapter,
+        id: `chapter-${Date.now()}-${index}-${chapterIndex}`,
+        estimatedDuration: chapter.materials.reduce((total, material) => 
+          total + (material.duration || 0), 0),
+        isPublished: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        materials: chapter.materials.map((material, materialIndex) => ({
+          ...material,
+          id: `material-${Date.now()}-${index}-${chapterIndex}-${materialIndex}`,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        })),
+      })),
+    }));
+    
+    const newCourse: Course = {
+      ...courseData,
+      id: `course-${Date.now()}`,
+      currency: 'BDT' as const,
+      status: 'draft',
+      subjects,
+      totalStudents: 0,
+      rating: 0,
+      totalRatings: 0,
+      version: 1,
+      allowComments: true,
+      allowRating: true,
+      passingScore: 70,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    
+    return newCourse;
+  }
+);
+
+export const updateCourse = createAsyncThunk(
+  'courses/updateCourse',
+  async ({ id, data }: { id: string; data: UpdateCourseFormData }) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1200));
+    
+    const updatedCourse: Course = {
+      ...data,
+      id,
+      updatedAt: new Date().toISOString(),
+    } as Course;
+    
+    return updatedCourse;
+  }
+);
+
+export const deleteCourse = createAsyncThunk(
+  'courses/deleteCourse',
+  async (courseId: string) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    return courseId;
+  }
+);
+
+export const validateCourseForPublishing = createAsyncThunk(
+  'courses/validateCourseForPublishing',
+  async (courseId: string) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    const dummyCourses = generateDummyCourses();
+    const course = dummyCourses.find(c => c.id === courseId);
+    
+    if (!course) {
+      throw new Error('Course not found');
+    }
+    
+    const result: CourseValidationResult = {
+      isValid: true,
+      canPublish: true,
+      errors: [],
+      warnings: [],
+      suggestions: [],
+    };
+
+    // Check basic course information
+    if (!course.title || !course.titleEn) {
+      result.errors.push({
+        type: 'error',
+        message: 'কোর্সের নাম সম্পূর্ণ নয়',
+        field: 'title',
+        details: ['বাংলা এবং ইংরেজি উভয় নাম প্রয়োজন'],
+      });
+    }
+
+    if (!course.description || course.description.length < 50) {
+      result.errors.push({
+        type: 'error',
+        message: 'কোর্সের বিবরণ অপর্যাপ্ত',
+        field: 'description',
+        details: ['কমপক্ষে ৫০ অক্ষরের বিবরণ প্রয়োজন'],
+      });
+    }
+
+    if (!course.thumbnail) {
+      result.errors.push({
+        type: 'error',
+        message: 'কোর্সের থাম্বনেইল নেই',
+        field: 'thumbnail',
+        details: ['একটি আকর্ষণীয় থাম্বনেইল যোগ করুন'],
+      });
+    }
+
+    if (!course.instructor) {
+      result.errors.push({
+        type: 'error',
+        message: 'শিক্ষক নির্ধারিত নয়',
+        field: 'instructor',
+        details: ['একজন শিক্ষক নির্বাচন করুন'],
+      });
+    }
+
+    // Check course content
+    if (!course.subjects || course.subjects.length === 0) {
+      result.errors.push({
+        type: 'error',
+        message: 'কোর্সে কোনো বিষয় নেই',
+        field: 'subjects',
+        details: ['অন্তত একটি বিষয় যোগ করুন'],
+      });
+    } else {
+      // Check subjects
+      const emptySubjects = course.subjects.filter(subject => 
+        !subject.chapters || subject.chapters.length === 0
+      );
+      
+      if (emptySubjects.length > 0) {
+        result.errors.push({
+          type: 'error',
+          message: `${emptySubjects.length}টি বিষয়ে কোনো অধ্যায় নেই`,
+          field: 'subjects',
+          details: emptySubjects.map(subject => `• ${subject.title}`),
+        });
+      }
+
+      // Check chapters
+      const emptyChapters = course.subjects.flatMap(subject => 
+        subject.chapters.filter(chapter => 
+          !chapter.materials || chapter.materials.length === 0
+        )
+      );
+
+      if (emptyChapters.length > 0) {
+        result.errors.push({
+          type: 'error',
+          message: `${emptyChapters.length}টি অধ্যায়ে কোনো উপাদান নেই`,
+          field: 'chapters',
+          details: emptyChapters.slice(0, 5).map(chapter => `• ${chapter.title}`),
+        });
+      }
+
+      // Check for video content
+      const totalMaterials = course.subjects.flatMap(subject => 
+        subject.chapters.flatMap(chapter => chapter.materials)
+      );
+      
+      const videoMaterials = totalMaterials.filter(material => material.type === 'video');
+      
+      if (videoMaterials.length === 0) {
+        result.warnings.push({
+          type: 'warning',
+          message: 'কোর্সে কোনো ভিডিও কন্টেন্ট নেই',
+          field: 'materials',
+          details: ['ভিডিও কন্টেন্ট শিক্ষার্থীদের জন্য আরও আকর্ষণীয়'],
+        });
+      }
+
+      // Check for assessments
+      const assessmentMaterials = totalMaterials.filter(material => 
+        material.type === 'mcq' || material.type === 'quiz' || material.type === 'assignment'
+      );
+      
+      if (assessmentMaterials.length === 0) {
+        result.warnings.push({
+          type: 'warning',
+          message: 'কোর্সে কোনো মূল্যায়ন নেই',
+          field: 'materials',
+          details: ['MCQ, কুইজ বা অ্যাসাইনমেন্ট যোগ করুন'],
+        });
+      }
+    }
+
+    // Check pricing
+    if (course.price <= 0) {
+      result.warnings.push({
+        type: 'warning',
+        message: 'কোর্সটি বিনামূল্যে',
+        field: 'price',
+        details: ['নিশ্চিত হন যে এটি বিনামূল্যে হওয়ার কথা'],
+      });
+    }
+
+    // Check learning outcomes
+    if (!course.learningOutcomes || course.learningOutcomes.length === 0) {
+      result.warnings.push({
+        type: 'warning',
+        message: 'শিক্ষার ফলাফল উল্লেখ নেই',
+        field: 'learningOutcomes',
+        details: ['শিক্ষার্থীরা কী শিখবে তা উল্লেখ করুন'],
+      });
+    }
+
+    // Check tags
+    if (!course.tags || course.tags.length === 0) {
+      result.suggestions.push({
+        type: 'info',
+        message: 'কোর্সে কোনো ট্যাগ নেই',
+        field: 'tags',
+        details: ['ট্যাগ যোগ করলে কোর্স খুঁজে পাওয়া সহজ হয়'],
+      });
+    }
+
+    // Check enrollment settings
+    if (course.maxStudents && course.maxStudents < 10) {
+      result.suggestions.push({
+        type: 'info',
+        message: 'সর্বোচ্চ শিক্ষার্থী সংখ্যা কম',
+        field: 'maxStudents',
+        details: [`বর্তমানে সর্বোচ্চ ${course.maxStudents} জন`],
+      });
+    }
+
+    // Determine final validation status
+    result.isValid = result.errors.length === 0;
+    result.canPublish = result.errors.length === 0;
+    
+    return result;
+  }
+);
+
+export const changeCourseStatus = createAsyncThunk(
+  'courses/changeCourseStatus',
+  async (statusChangeInfo: CourseStatusChangeInfo) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Validate status transition
+    const validTransitions: Record<Course['status'], Course['status'][]> = {
+      'draft': ['under_review', 'published'],
+      'under_review': ['draft', 'published'],
+      'published': ['draft', 'archived'],
+      'archived': ['draft'],
+    };
+    
+    const dummyCourses = generateDummyCourses();
+    const course = dummyCourses.find(c => c.id === statusChangeInfo.courseId);
+    
+    if (!course) {
+      throw new Error('Course not found');
+    }
+    
+    const allowedStatuses = validTransitions[course.status];
+    if (!allowedStatuses.includes(statusChangeInfo.newStatus)) {
+      throw new Error(`Cannot change status from ${course.status} to ${statusChangeInfo.newStatus}`);
+    }
+    
+    // Check if enrollments need to be preserved
+    if (!statusChangeInfo.preserveEnrollments && course.totalStudents > 0) {
+      throw new Error('Cannot change status without preserving enrollments when students are enrolled');
+    }
+    
+    return {
+      courseId: statusChangeInfo.courseId,
+      newStatus: statusChangeInfo.newStatus,
+      changedAt: new Date().toISOString(),
+      changedBy: statusChangeInfo.changedBy || 'admin-1',
+      reason: statusChangeInfo.reason,
+      preservedEnrollments: statusChangeInfo.preserveEnrollments ? course.totalStudents : 0,
+    };
+  }
+);
+
+export const publishCourseWithValidation = createAsyncThunk(
+  'courses/publishCourseWithValidation',
+  async (publishInfo: CoursePublishInfo, { dispatch }) => {
+    // First validate the course
+    const validationResult = await dispatch(validateCourseForPublishing(publishInfo.courseId)).unwrap();
+    
+    if (!validationResult.canPublish && !publishInfo.validationOverride) {
+      throw new Error('Course validation failed. Cannot publish course.');
+    }
+    
+    // Simulate API call for publishing
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const dummyCourses = generateDummyCourses();
+    const course = dummyCourses.find(c => c.id === publishInfo.courseId);
+    
+    if (!course) {
+      throw new Error('Course not found');
+    }
+    
+    // Check if course can be published
+    if (course.status !== 'draft' && course.status !== 'under_review') {
+      throw new Error('Only draft or under review courses can be published');
+    }
+    
+    return {
+      courseId: publishInfo.courseId,
+      publishedAt: publishInfo.schedulePublish && publishInfo.publishDate 
+        ? publishInfo.publishDate 
+        : new Date().toISOString(),
+      publishedBy: publishInfo.publishedBy || 'admin-1',
+      publishNotes: publishInfo.publishNotes,
+      preservedEnrollments: publishInfo.preserveEnrollments ? course.totalStudents : 0,
+      validationOverridden: publishInfo.validationOverride,
+    };
+  }
+);
+
+export const fetchCourseStats = createAsyncThunk(
+  'courses/fetchCourseStats',
+  async () => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const dummyCourses = generateDummyCourses();
+    const categories = generateDummyCategories();
+    
+    const stats: CourseStats = {
+      totalCourses: dummyCourses.length,
+      publishedCourses: dummyCourses.filter(c => c.status === 'published').length,
+      draftCourses: dummyCourses.filter(c => c.status === 'draft').length,
+      archivedCourses: dummyCourses.filter(c => c.status === 'archived').length,
+      underReviewCourses: dummyCourses.filter(c => c.status === 'under_review').length,
+      totalEnrollments: dummyCourses.reduce((total, course) => total + course.totalStudents, 0),
+      totalRevenue: dummyCourses.reduce((total, course) => total + (course.price * course.totalStudents), 0),
+      averageRating: dummyCourses.reduce((total, course) => total + course.rating, 0) / dummyCourses.length,
+      totalInstructors: 6, // Based on dummy data
+      popularCourses: dummyCourses.filter(c => c.totalStudents > 100).slice(0, 5),
+      recentCourses: dummyCourses.slice(0, 5),
+      topRatedCourses: dummyCourses.filter(c => c.rating > 4.5).slice(0, 5),
+      coursesByCategory: categories.map(cat => ({
+        category: cat.name,
+        count: dummyCourses.filter(c => c.category === cat.id).length,
+        revenue: dummyCourses
+          .filter(c => c.category === cat.id)
+          .reduce((total, course) => total + (course.price * course.totalStudents), 0),
+      })),
+      coursesByLevel: [
+        { level: 'প্রাথমিক', count: dummyCourses.filter(c => c.level === 'beginner').length },
+        { level: 'মধ্যম', count: dummyCourses.filter(c => c.level === 'intermediate').length },
+        { level: 'উন্নত', count: dummyCourses.filter(c => c.level === 'advanced').length },
+      ],
+      enrollmentTrends: [
+        { month: 'জানুয়ারি', enrollments: 120, revenue: 450000 },
+        { month: 'ফেব্রুয়ারি', enrollments: 150, revenue: 520000 },
+        { month: 'মার্চ', enrollments: 180, revenue: 680000 },
+        { month: 'এপ্রিল', enrollments: 200, revenue: 750000 },
+        { month: 'মে', enrollments: 220, revenue: 820000 },
+        { month: 'জুন', enrollments: 190, revenue: 710000 },
+      ],
+      revenueByMonth: [
+        { month: 'জানুয়ারি', revenue: 450000 },
+        { month: 'ফেব্রুয়ারি', revenue: 520000 },
+        { month: 'মার্চ', revenue: 680000 },
+        { month: 'এপ্রিল', revenue: 750000 },
+        { month: 'মে', revenue: 820000 },
+        { month: 'জুন', revenue: 710000 },
+      ],
+    };
+    
+    return { stats };
+  }
+);
+
+export const bulkUpdateCourses = createAsyncThunk(
+  'courses/bulkUpdateCourses',
+  async (operation: BulkCourseOperation) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    return operation;
+  }
+);
+
+// Create the slice
+const courseSlice = createSlice({
+  name: 'courses',
+  initialState,
+  reducers: {
+    setFilters: (state, action: PayloadAction<Partial<CourseFilter>>) => {
+      state.filters = { ...state.filters, ...action.payload };
+    },
+    clearFilters: (state) => {
+      state.filters = initialState.filters;
+    },
+    setSelectedCourses: (state, action: PayloadAction<string[]>) => {
+      state.selectedCourses = action.payload;
+    },
+    toggleCourseSelection: (state, action: PayloadAction<string>) => {
+      const courseId = action.payload;
+      const index = state.selectedCourses.indexOf(courseId);
+      if (index > -1) {
+        state.selectedCourses.splice(index, 1);
+      } else {
+        state.selectedCourses.push(courseId);
+      }
+    },
+    selectAllCourses: (state) => {
+      state.selectedCourses = state.courses.map(course => course.id);
+    },
+    clearSelection: (state) => {
+      state.selectedCourses = [];
+    },
+    addToRecentlyViewed: (state, action: PayloadAction<Course>) => {
+      const course = action.payload;
+      const existingIndex = state.recentlyViewed.findIndex(c => c.id === course.id);
+      
+      if (existingIndex > -1) {
+        state.recentlyViewed.splice(existingIndex, 1);
+      }
+      
+      state.recentlyViewed.unshift(course);
+      
+      // Keep only last 10 items
+      if (state.recentlyViewed.length > 10) {
+        state.recentlyViewed = state.recentlyViewed.slice(0, 10);
+      }
+    },
+    addToPublishQueue: (state, action: PayloadAction<CoursePublishInfo>) => {
+      state.publishQueue.push(action.payload);
+    },
+    removeFromPublishQueue: (state, action: PayloadAction<string>) => {
+      state.publishQueue = state.publishQueue.filter(item => item.courseId !== action.payload);
+    },
+    setCurrentCourse: (state, action: PayloadAction<Course | null>) => {
+      state.currentCourse = action.payload;
+    },
+    clearErrors: (state) => {
+      state.error = initialState.error;
+    },
+    clearValidationResults: (state) => {
+      state.validationResults = {};
+    },
+    setValidationResult: (state, action: PayloadAction<{ courseId: string; result: CourseValidationResult }>) => {
+      state.validationResults[action.payload.courseId] = action.payload.result;
+    },
+  },
+  extraReducers: (builder) => {
+    // Fetch courses
+    builder
+      .addCase(fetchCourses.pending, (state) => {
+        state.loading.list = true;
+        state.error.list = null;
+      })
+      .addCase(fetchCourses.fulfilled, (state, action) => {
+        state.loading.list = false;
+        state.courses = action.payload.courses;
+        state.pagination = action.payload.pagination;
+      })
+      .addCase(fetchCourses.rejected, (state, action) => {
+        state.loading.list = false;
+        state.error.list = action.error.message || 'Failed to fetch courses';
+      });
+
+    // Fetch course by ID
+    builder
+      .addCase(fetchCourseById.pending, (state) => {
+        state.loading.details = true;
+        state.error.details = null;
+      })
+      .addCase(fetchCourseById.fulfilled, (state, action) => {
+        state.loading.details = false;
+        state.currentCourse = action.payload;
+      })
+      .addCase(fetchCourseById.rejected, (state, action) => {
+        state.loading.details = false;
+        state.error.details = action.error.message || 'Failed to fetch course details';
+      });
+
+    // Fetch categories
+    builder
+      .addCase(fetchCourseCategories.pending, (state) => {
+        state.loading.categories = true;
+        state.error.categories = null;
+      })
+      .addCase(fetchCourseCategories.fulfilled, (state, action) => {
+        state.loading.categories = false;
+        state.categories = action.payload.categories;
+      })
+      .addCase(fetchCourseCategories.rejected, (state, action) => {
+        state.loading.categories = false;
+        state.error.categories = action.error.message || 'Failed to fetch categories';
+      });
+
+    // Create course
+    builder
+      .addCase(createCourse.pending, (state) => {
+        state.loading.create = true;
+        state.error.create = null;
+      })
+      .addCase(createCourse.fulfilled, (state, action) => {
+        state.loading.create = false;
+        state.courses.unshift(action.payload);
+      })
+      .addCase(createCourse.rejected, (state, action) => {
+        state.loading.create = false;
+        state.error.create = action.error.message || 'Failed to create course';
+      });
+
+    // Update course
+    builder
+      .addCase(updateCourse.pending, (state) => {
+        state.loading.update = true;
+        state.error.update = null;
+      })
+      .addCase(updateCourse.fulfilled, (state, action) => {
+        state.loading.update = false;
+        const index = state.courses.findIndex(c => c.id === action.payload.id);
+        if (index > -1) {
+          state.courses[index] = action.payload;
+        }
+        if (state.currentCourse?.id === action.payload.id) {
+          state.currentCourse = action.payload;
+        }
+      })
+      .addCase(updateCourse.rejected, (state, action) => {
+        state.loading.update = false;
+        state.error.update = action.error.message || 'Failed to update course';
+      });
+
+    // Delete course
+    builder
+      .addCase(deleteCourse.pending, (state) => {
+        state.loading.delete = true;
+        state.error.delete = null;
+      })
+      .addCase(deleteCourse.fulfilled, (state, action) => {
+        state.loading.delete = false;
+        state.courses = state.courses.filter(c => c.id !== action.payload);
+        if (state.currentCourse?.id === action.payload) {
+          state.currentCourse = null;
+        }
+      })
+      .addCase(deleteCourse.rejected, (state, action) => {
+        state.loading.delete = false;
+        state.error.delete = action.error.message || 'Failed to delete course';
+      });
+
+    // Validate course for publishing
+    builder
+      .addCase(validateCourseForPublishing.pending, (state) => {
+        state.loading.validate = true;
+        state.error.validate = null;
+      })
+      .addCase(validateCourseForPublishing.fulfilled, (state, action) => {
+        state.loading.validate = false;
+        const courseId = action.meta.arg;
+        state.validationResults[courseId] = action.payload;
+      })
+      .addCase(validateCourseForPublishing.rejected, (state, action) => {
+        state.loading.validate = false;
+        state.error.validate = action.error.message || 'Failed to validate course';
+      });
+
+    // Change course status
+    builder
+      .addCase(changeCourseStatus.pending, (state) => {
+        state.loading.statusChange = true;
+        state.error.statusChange = null;
+      })
+      .addCase(changeCourseStatus.fulfilled, (state, action) => {
+        state.loading.statusChange = false;
+        const { courseId, newStatus, changedAt, changedBy } = action.payload;
+        
+        // Update course status
+        const courseIndex = state.courses.findIndex(c => c.id === courseId);
+        if (courseIndex > -1) {
+          state.courses[courseIndex].status = newStatus;
+          state.courses[courseIndex].updatedAt = changedAt;
+          state.courses[courseIndex].lastModifiedBy = changedBy;
+          
+          // Set published date if publishing
+          if (newStatus === 'published') {
+            state.courses[courseIndex].publishedAt = changedAt;
+            state.courses[courseIndex].publishedBy = changedBy;
+          }
+        }
+        
+        if (state.currentCourse?.id === courseId) {
+          state.currentCourse.status = newStatus;
+          state.currentCourse.updatedAt = changedAt;
+          state.currentCourse.lastModifiedBy = changedBy;
+          
+          if (newStatus === 'published') {
+            state.currentCourse.publishedAt = changedAt;
+            state.currentCourse.publishedBy = changedBy;
+          }
+        }
+      })
+      .addCase(changeCourseStatus.rejected, (state, action) => {
+        state.loading.statusChange = false;
+        state.error.statusChange = action.error.message || 'Failed to change course status';
+      });
+
+    // Publish course with validation
+    builder
+      .addCase(publishCourseWithValidation.pending, (state) => {
+        state.loading.publish = true;
+        state.error.publish = null;
+      })
+      .addCase(publishCourseWithValidation.fulfilled, (state, action) => {
+        state.loading.publish = false;
+        const { courseId, publishedAt, publishedBy, preservedEnrollments } = action.payload;
+        
+        // Update course status
+        const courseIndex = state.courses.findIndex(c => c.id === courseId);
+        if (courseIndex > -1) {
+          state.courses[courseIndex].status = 'published';
+          state.courses[courseIndex].publishedAt = publishedAt;
+          state.courses[courseIndex].publishedBy = publishedBy;
+          // Preserve enrollments if specified
+          if (preservedEnrollments !== undefined) {
+            state.courses[courseIndex].totalStudents = preservedEnrollments;
+          }
+        }
+        
+        if (state.currentCourse?.id === courseId) {
+          state.currentCourse.status = 'published';
+          state.currentCourse.publishedAt = publishedAt;
+          state.currentCourse.publishedBy = publishedBy;
+          if (preservedEnrollments !== undefined) {
+            state.currentCourse.totalStudents = preservedEnrollments;
+          }
+        }
+        
+        // Remove from publish queue
+        state.publishQueue = state.publishQueue.filter(item => item.courseId !== courseId);
+      })
+      .addCase(publishCourseWithValidation.rejected, (state, action) => {
+        state.loading.publish = false;
+        state.error.publish = action.error.message || 'Failed to publish course with validation';
+      });
+
+    // Fetch stats
+    builder
+      .addCase(fetchCourseStats.pending, (state) => {
+        state.loading.stats = true;
+        state.error.stats = null;
+      })
+      .addCase(fetchCourseStats.fulfilled, (state, action) => {
+        state.loading.stats = false;
+        state.stats = action.payload.stats;
+      })
+      .addCase(fetchCourseStats.rejected, (state, action) => {
+        state.loading.stats = false;
+        state.error.stats = action.error.message || 'Failed to fetch course statistics';
+      });
+
+    // Bulk operations
+    builder
+      .addCase(bulkUpdateCourses.pending, (state) => {
+        state.loading.update = true;
+        state.error.update = null;
+      })
+      .addCase(bulkUpdateCourses.fulfilled, (state, action) => {
+        state.loading.update = false;
+        const { courseIds, operation } = action.payload;
+        
+        // Update courses based on operation
+        state.courses = state.courses.map(course => {
+          if (courseIds.includes(course.id)) {
+            switch (operation) {
+              case 'publish':
+                return { ...course, status: 'published' as const, publishedAt: new Date().toISOString() };
+              case 'unpublish':
+                return { ...course, status: 'draft' as const, publishedAt: undefined };
+              case 'archive':
+                return { ...course, status: 'archived' as const };
+              default:
+                return course;
+            }
+          }
+          return course;
+        });
+        
+        // Clear selection after bulk operation
+        state.selectedCourses = [];
+      })
+      .addCase(bulkUpdateCourses.rejected, (state, action) => {
+        state.loading.update = false;
+        state.error.update = action.error.message || 'Failed to perform bulk operation';
+      });
+  },
 });
 
-export const { setSelectedCourse, setLoading, setError } = courseSlice.actions;
+// Export actions
+export const {
+  setFilters,
+  clearFilters,
+  setSelectedCourses,
+  toggleCourseSelection,
+  selectAllCourses,
+  clearSelection,
+  addToRecentlyViewed,
+  addToPublishQueue,
+  removeFromPublishQueue,
+  clearErrors,
+  setCurrentCourse,
+  clearValidationResults,
+  setValidationResult,
+} = courseSlice.actions;
+
+// Export reducer
 export default courseSlice.reducer;

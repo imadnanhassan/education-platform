@@ -15,6 +15,7 @@ export interface TableAction<T> {
   onClick: (row: T) => void;
   className?: string;
   icon?: React.ReactNode;
+  condition?: (row: T) => boolean;
 }
 
 export interface PaginationConfig {
@@ -218,7 +219,9 @@ const DataTable = <T extends Record<string, any>>({
                   {actions && actions.length > 0 && (
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex items-center justify-end space-x-2">
-                        {actions.map((action, actionIndex) => (
+                        {actions
+                          .filter(action => !action.condition || action.condition(row))
+                          .map((action, actionIndex) => (
                           <button
                             key={actionIndex}
                             onClick={(e) => {
